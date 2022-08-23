@@ -12,14 +12,7 @@
           <div class="author-img">
           </div>
         </div>
-        <!-- <nav>
-          <ul>
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
-            <li>4</li>
-          </ul>
-        </nav> -->
+        <myNav></myNav>
       </div>
     </div>
   </div>
@@ -27,6 +20,7 @@
 
 <script setup lang="ts">
 import mySnow from "@/components/mySnow.vue"
+import myNav from "../components/myNav.vue";
 </script>
 
 <style lang="scss" scoped>
