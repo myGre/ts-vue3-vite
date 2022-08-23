@@ -1,17 +1,7 @@
 <template>
-  <div class="login-container flx-center">
-    <SwitchDark class="dark" />
-    <div class="login-box">
-      <div class="login-left">
-        <img src="@/assets/images/login_left0.png" alt="login" />
-      </div>
-      <div class="login-form">
-        <div class="login-logo">
-          <img class="login-icon" src="@/assets/images/logo.svg" alt="" />
-          <h2 class="logo-text">Geeker-Admin</h2>
-        </div>
-        <LoginForm ref="loginRef" />
-      </div>
+  <div class="login-content">
+    <div class="login-form">
+      <LoginForm class="login" ref="loginRef" />
     </div>
   </div>
 </template>
@@ -22,5 +12,12 @@ import LoginForm from "./components/LoginForm.vue";
 </script>
 
 <style scoped lang="scss">
+.login-content {
+  width: 100%;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
 @import "./index.scss";
 </style>

@@ -1,18 +1,31 @@
 <template>
-  <el-card>
-    <el-form ref="loginFormRef" :model="loginForm" status-icon :rules="rules" class="demo-loginForm">
-      <el-form-item prop="username">
-        <el-input v-model.number="loginForm.username" placeholder="用户名：admin" />
-      </el-form-item>
-      <el-form-item prop="password">
-        <el-input v-model="loginForm.password" type="password" placeholder="密码：123456" autocomplete="off" />
-      </el-form-item>
-      <el-form-item>
-        <el-button type="primary" @click="submitForm(loginFormRef)">确定</el-button>
-        <el-button @click="resetForm(loginFormRef)">重置</el-button>
-      </el-form-item>
-    </el-form>
-  </el-card>
+  <el-form ref="loginFormRef" :model="loginForm" :rules="loginRules" size="large">
+    <el-form-item prop="username">
+      <el-input v-model="loginForm.username" placeholder="用户名：admin / user">
+        <template #prefix>
+          <el-icon class="el-input__icon">
+            <user />
+          </el-icon>
+        </template>
+      </el-input>
+    </el-form-item>
+    <el-form-item prop="password">
+      <el-input type="password" v-model="loginForm.password" placeholder="密码：123456" show-password
+        autocomplete="new-password">
+        <template #prefix>
+          <el-icon class="el-input__icon">
+            <lock />
+          </el-icon>
+        </template>
+      </el-input>
+    </el-form-item>
+  </el-form>
+  <div class="login-btn">
+    <el-button round @click="resetForm(loginFormRef)" size="large">重置</el-button>
+    <el-button round @click="login(loginFormRef)" size="large" type="primary">
+      登录
+    </el-button>
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -33,13 +46,13 @@ const loginForm = reactive<Login.ReqLoginForm>({
   password: "",
 })
 
-const rules = reactive({
+const loginRules = reactive({
   password: [{ min: 2, max: 10, message: 'Length should be 2 to 10', trigger: 'blur' }],
   username: [{ min: 2, max: 10, message: 'Length should be 2 to 10', trigger: 'blur' }],
 
 })
 
-const submitForm = (formEl: FormInstance | undefined) => {
+const login = (formEl: FormInstance | undefined) => {
   if (!formEl) return
   formEl.validate((valid) => {
     if (valid) {
