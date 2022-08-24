@@ -204,7 +204,15 @@
 </template>
 
 <script setup lang="ts">
+import { onMounted } from "vue-demi"
 
+
+
+const prop = defineProps(["navIndex"])
+
+onMounted(() => {
+
+})
 </script>
 
 <style lang="scss" scoped>

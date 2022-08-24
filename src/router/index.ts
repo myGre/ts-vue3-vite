@@ -15,7 +15,12 @@ const routes = [
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
+  routes,
+  strict: false,
+  // 切换页面，回到顶部
+  scrollBehavior: () => ({ left: 0, top: 0 })
 })
+
+
 
 export default router
