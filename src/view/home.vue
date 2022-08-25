@@ -1,136 +1,189 @@
 <template>
   <div class="home-content">
-    <mySnow :navIndex="index"></mySnow>
-    <!-- <header>
-      <div class="img">
-        <img src="" alt="">
-      </div>
-    </header> -->
-    <div class="content">
-      <div class="content-box" :style="activeBgColor">
-        <!-- 头像 -->
-        <div class="author">
-          <div class="author-img">
-          </div>
-        </div>
-        <!-- 导航 -->
-        <myNav ref="myNavRef" @navItemEnvent="navItemEnvent"></myNav>
-        <!-- tab栏 -->
-        <div class="informationCard">
-          <!-- 个人信息栏 -->
-          <div class="userInformation"></div>
-          <!-- 技能 -->
-          <div class="technology"></div>
-          <!-- 资料 -->
-          <div class="myInformation">
-            <myCard></myCard>
-          </div>
-          <!-- 相册 -->
-          <div class="images"></div>
-        </div>
-        <!-- 资料卡 -->
-      </div>
+    <header class="flex">
+      <article>
+        <h1>Hws Dreagreatger</h1>
+        <p>Let's start showing off some magic...</p>
+      </article>
+    </header>
+    <div class="navs">
+      <nav v-show="show" class="shake">
+        <li @click="navClickItem(index)" v-for="(item, index) in navObj" :key="index"
+          :class="index == navItem ? 'navItemCode' : ''">{{ item }}</li>
+      </nav>
+      <button class="icon-btn" ref="btnRef" @click="navShow">
+        <div class="icon"></div>
+      </button>
     </div>
+    <!-- 内容区 -->
+    <my-mian></my-mian>
   </div>
 </template>
 
 <script setup lang="ts">
-import mySnow from "@/components/mySnow.vue"
-import myNav from "@/components/myNav.vue";
-import myCard from "@/components/myCard/index.vue"
-import { computed, onMounted, ref, watch } from "vue-demi";
+import { computed, ref } from "vue-demi";
+import myMian from "../components/myMian/index.vue"
 
-const myNavRef = ref()
-const bgColorsBody = ref(["rgb(153, 153, 251, .4)", "rgb(255, 150, 189, .4)", "rgb(255, 231, 151, .4)",
-  "rgb(207, 255, 241, .4)"])
+const navObj = ref(["home", "资料卡", "个人信息", "相册", "学籍"])
+const btnRef = ref()
+const navItem = ref<number>(0)
+const show = ref(true)
 
-// 当前背景颜色
-const index = ref(0)
-const activeBgColor = computed(() => {
-  return `background-color: ${bgColorsBody.value[index.value]}`
-})
-function navItemEnvent(i: number) {
-  index.value = i
+function navShow() {
+  btnRef.value.classList.toggle("toggled")
+  show.value = !show.value
+}
+function navClickItem(index: number) {
+  // console.log(index);
+  navItem.value = index
 }
 </script>
 
 <style lang="scss" scoped>
+$blue: rgb(33, 150, 243);
+
 .home-content {
   width: 100%;
-  height: 2000px;
+  overflow-x: hidden;
+  position: relative;
 
-  // background-color: rgb(255, 255, 255);
+  // 头部
   header {
-    // height: 300px;
-    // width: 80%;
-    // margin: 0 auto;
-    // background-color: rgb(202, 202, 202);
+    width: 100vw;
+    min-height: 400px;
+    height: 100vh;
+    background: #03293c;
+    color: white;
 
-    img {
-      // width: 1024px;
-      // height: 00px;
+    font-weight: bold;
+    text-align: left;
+
+    article {
+      padding-right: 50%;
+      width: 30%;
+      float: left;
+
+      h1 {
+        font-size: 9rem;
+        margin: 0 0 2.5rem;
+        line-height: 1em;
+      }
+
+      p {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+      }
     }
   }
 
-  .content {
-    width: 100%;
-    height: 2000px;
-    position: relative;
-    top: -2000px;
+  // 导航栏
+  .navs {
+    position: absolute;
+    top: 100px;
+    right: 60px;
+    display: flex;
+    padding: 10px;
+    border-radius: 10px;
+    height: 80px;
+    background-color: rgb(0, 74, 110, .2);
+    // width: 30%;
+    // height: 50px;
 
-    .content-box {
+    .icon-btn {
+      position: relative;
+      ;
+      top: 10px;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      height: 60px;
+      outline: none;
+      padding: 0;
+      width: 80px;
+
+      &.toggled {
+        .icon {
+          background-color: transparent;
+
+          &:before {
+            top: 0px;
+            transform: rotate(-45deg);
+          }
+
+          &:after {
+            bottom: 0px;
+            transform: rotate(45deg);
+          }
+        }
+      }
+    }
+
+    .icon {
+      background-color: $blue;
+      border-radius: 80px;
+      height: 10px;
+      position: relative;
+      transition: all 0.25s;
+      width: 80px;
+
+      &:before,
+      &:after {
+        background-color: $blue;
+        border-radius: 80px;
+        content: "";
+        height: 10px;
+        left: 0px;
+        position: absolute;
+        z-index: 0;
+        transition: all 0.25s;
+        width: 80px;
+      }
+
+      &:before {
+        top: -30px;
+      }
+
+      &:after {
+        bottom: -30px;
+      }
+    }
+
+    nav {
+      // position: absolute;
       box-sizing: border-box;
-      width: 80%;
-      height: 1700px;
-      margin: 0 auto;
-      padding: 15px;
-      border-top-left-radius: 50px;
-      border-top-right-radius: 50px;
-      // box-shadow: 4px 4px 7px rgb(0 0 0 / 20%);
-      // background-color: rgba(255, 255, 255, 0.2);
+      color: white;
+      font-size: 2rem;
+      width: 600px;
 
-      .author {
-        display: flex;
-        flex-direction: row;
+      display: flex;
+      justify-content: space-between;
+      height: 80px;
+      line-height: 80px;
 
-        .author-img {
-          width: 100px;
-          height: 100px;
-          border-radius: 50%;
-          // text-align: center;
-          background-color: rgb(240, 248, 255, 0.3);
-        }
-      }
+      li {
+        width: 20%;
+        text-align: center;
+        cursor: pointer;
 
-      .informationCard {
-        display: flex;
-        flex-direction: column;
-
-        .userInformation {
-          width: 100%;
-          height: 300px;
-          background-color: rgb(77, 77, 77);
+        &:hover {
+          border-radius: 10px;
+          // background-color: rgb(240, 248, 255, .2);
+          border: 3px solid rgb(0, 74, 110, .5);
         }
 
-        // .technology {
-        //   width: 100%;
-        //   height: 300px;
-        //   background-color: rgb(163, 138, 105);
-        // }
-
-        // .myInformation {
-        //   width: 100%;
-        //   height: 300px;
-        //   background-color: rgb(87, 59, 23);
-        // }
-
-        // .images {
-        //   width: 100%;
-        //   height: 300px;
-        //   background-color: rgb(102, 102, 102);
-        // }
+        &.navItemCode {
+          border-radius: 10px;
+          background-color: rgb(240, 248, 255, .2);
+          border: 3px solid rgb(0, 74, 110, .5);
+        }
       }
     }
   }
+
+  .shake {
+    animation: shake 1s;
+  }
+
+  @keyframes shake {}
 }
 </style>
