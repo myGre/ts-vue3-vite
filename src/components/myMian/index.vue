@@ -1,6 +1,6 @@
 <template>
-  <main>
-    <section class="setction flex">
+  <el-carousel ref="mianRef" height="1000px" direction="vertical" :autoplay="false">
+    <el-carousel-item class="setction flex">
       <div class="setction__left"></div>
       <div class="setction__right">
         <article>
@@ -9,8 +9,8 @@
             Bunch the Brady Bunch that's the way we all became the Brady Bunch.</p>
         </article>
       </div>
-    </section>
-    <section class="setction flex">
+    </el-carousel-item>
+    <el-carousel-item class="setction flex">
       <div class="setction__left">
         <article>
           <h3>The weather started getting rough — the tiny ship was tossed.</h3>
@@ -19,8 +19,8 @@
         </article>
       </div>
       <div class="setction__right"></div>
-    </section>
-    <section class="setction flex">
+    </el-carousel-item>
+    <el-carousel-item class="setction flex">
       <div class="setction__left"></div>
       <div class="setction__right">
         <article>
@@ -29,8 +29,8 @@
             Bunch the Brady Bunch that's the way we all became the Brady Bunch.</p>
         </article>
       </div>
-    </section>
-    <section class="setction flex">
+    </el-carousel-item>
+    <el-carousel-item class="setction flex">
       <div class="setction__left">
         <article>
           <h3>The weather started getting rough — the tiny ship was tossed.</h3>
@@ -39,20 +39,34 @@
         </article>
       </div>
       <div class="setction__right"></div>
-    </section>
-  </main>
+    </el-carousel-item>
+  </el-carousel>
+
 </template>
 
 <script setup lang="ts">
+import { nextTick, onMounted, ref } from "vue-demi";
 
+const mianRef = ref()
+
+function getMianHeight() {
+  console.log(mianRef.value.children);
+}
+
+onMounted(() => {
+  getMianHeight()
+})
+defineExpose({
+})
 </script>
 
 <style lang="scss" scoped>
+// @import url(./index.scss);
+
 .setction {
   width: 100vw;
   height: 100vh;
   min-height: 400px;
-  // @extend .flex;
   color: #fff;
   padding-left: 10%;
   padding-right: 10%;

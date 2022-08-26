@@ -1,13 +1,13 @@
 <template>
   <div class="home-content">
-    <header class="flex">
+    <header class="flex" @mousemove="onMove()">
       <article>
         <h1>Hws Dreagreatger</h1>
         <p>Let's start showing off some magic...</p>
       </article>
     </header>
     <div class="navs">
-      <nav v-show="show" class="shake">
+      <nav :class="{ 'shake': show }">
         <li @click="navClickItem(index)" v-for="(item, index) in navObj" :key="index"
           :class="index == navItem ? 'navItemCode' : ''">{{ item }}</li>
       </nav>
@@ -16,18 +16,34 @@
       </button>
     </div>
     <!-- 内容区 -->
-    <my-mian></my-mian>
+    <my-mian ref="myMianRef"></my-mian>
+    <!-- 可视化页面底部翻页图标 -->
+    <div class="bounce-1" v-show="isBounce"></div>
+    <!-- footer -->
+    <footer>
+      <!-- 1756554@ccc.com -->
+    </footer>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue-demi";
+import { computed, nextTick, onMounted, ref, watch } from "vue-demi";
 import myMian from "../components/myMian/index.vue"
+import { useScroll } from "@/hooks/useScroll";
+
+// hooks
+const { listenerFunction, isBounce } = useScroll()
 
 const navObj = ref(["home", "资料卡", "个人信息", "相册", "学籍"])
 const btnRef = ref()
-const navItem = ref<number>(0)
-const show = ref(true)
+const myMianRef = ref() // mymain组件
+const navItem = ref<number>(0) // 当前导航
+const show = ref(false) // 是否显示页面底部翻页图标
+// 触发鼠标移动事件
+function onMove() {
+  // console.log(el);
+  listenerFunction()
+}
 
 function navShow() {
   btnRef.value.classList.toggle("toggled")
@@ -37,10 +53,16 @@ function navClickItem(index: number) {
   // console.log(index);
   navItem.value = index
 }
+
+onMounted(() => {
+  // console.log(myMianRef.value);
+
+})
+
 </script>
 
 <style lang="scss" scoped>
-$blue: rgb(33, 150, 243);
+$blue: rgb(7, 95, 167);
 
 .home-content {
   width: 100%;
@@ -85,9 +107,6 @@ $blue: rgb(33, 150, 243);
     padding: 10px;
     border-radius: 10px;
     height: 80px;
-    background-color: rgb(0, 74, 110, .2);
-    // width: 30%;
-    // height: 50px;
 
     .icon-btn {
       position: relative;
@@ -149,25 +168,25 @@ $blue: rgb(33, 150, 243);
     }
 
     nav {
-      // position: absolute;
       box-sizing: border-box;
       color: white;
       font-size: 2rem;
-      width: 600px;
-
+      width: 0px;
+      overflow: hidden;
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
       height: 80px;
       line-height: 80px;
+      opacity: 0;
+      transition: all 1s ease;
 
       li {
-        width: 20%;
+        width: 15%;
         text-align: center;
         cursor: pointer;
 
         &:hover {
           border-radius: 10px;
-          // background-color: rgb(240, 248, 255, .2);
           border: 3px solid rgb(0, 74, 110, .5);
         }
 
@@ -177,13 +196,86 @@ $blue: rgb(33, 150, 243);
           border: 3px solid rgb(0, 74, 110, .5);
         }
       }
+
+      &.shake {
+        width: 600px;
+        opacity: 1;
+      }
     }
   }
 
-  .shake {
-    animation: shake 1s;
+  // 下翻图标
+  .bounce-1 {
+    width: 40px;
+    height: 40px;
+    position: fixed;
+    // bottom: 80px;
+    left: 50%;
+    border-bottom: 3px solid rgba(255, 255, 255, 0.2);
+    border-right: 3px solid rgba(255, 255, 255, 0.2);
+    margin-left: -20px;
+    transform: translateY(0%) rotate(45deg);
+    animation: bounce-1 3s infinite normal;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      width: 40px;
+      height: 40px;
+      border-bottom: 3px solid rgba(255, 255, 255, 0.2);
+      border-right: 3px solid rgba(255, 255, 255, 0.2);
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 40px;
+      height: 40px;
+      border-bottom: 3px solid rgba(255, 255, 255, 0.2);
+      border-right: 3px solid rgba(255, 255, 255, 0.2);
+    }
   }
 
-  @keyframes shake {}
+  // .bounce-2 {
+  //   width: 40px;
+  //   height: 40px;
+  //   position: fixed;
+  //   bottom: 50px;
+  //   left: 50%;
+  //   border-bottom: 3px solid rgba(255, 255, 255, 0.2);
+  //   border-right: 3px solid rgba(255, 255, 255, 0.2);
+  //   margin-left: -20px;
+  //   transform: translateY(0%) rotate(45deg);
+  // }
+
+  // .bounce-3 {
+  //   width: 40px;
+  //   height: 40px;
+  //   position: fixed;
+  //   bottom: 20px;
+  //   left: 50%;
+  //   border-bottom: 3px solid rgba(255, 255, 255, 0.2);
+  //   border-right: 3px solid rgba(255, 255, 255, 0.2);
+  //   margin-left: -20px;
+  //   transform: translateY(0%) rotate(45deg);
+  // }
+}
+
+@keyframes bounce-1 {
+  0% {
+    opacity: 0;
+    bottom: 80px;
+  }
+
+  100% {
+    opacity: 1;
+    bottom: 40px;
+    // border-bottom: 2px solid rgb(226, 226, 226, .5);
+    // border-right: 2px solid rgb(226, 226, 226, .5);
+  }
 }
 </style>
