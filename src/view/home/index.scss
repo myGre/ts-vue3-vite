@@ -1,0 +1,115 @@
+$blue: rgb(7, 95, 167);
+
+.home-content {
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+
+  // 导航栏
+  .navs {
+    position: absolute;
+    z-index: 99;
+    top: 100px;
+    right: 60px;
+    display: flex;
+    padding: 10px;
+    border-radius: 10px;
+    height: 80px;
+
+    .icon-btn {
+      position: relative;
+      ;
+      top: 10px;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      height: 60px;
+      outline: none;
+      padding: 0;
+      width: 80px;
+
+      &.toggled {
+        .icon {
+          background-color: transparent;
+
+          &:before {
+            top: 0px;
+            transform: rotate(-45deg);
+          }
+
+          &:after {
+            bottom: 0px;
+            transform: rotate(45deg);
+          }
+        }
+      }
+    }
+
+    .icon {
+      background-color: $blue;
+      border-radius: 80px;
+      height: 10px;
+      position: relative;
+      transition: all 0.25s;
+      width: 80px;
+
+      &:before,
+      &:after {
+        background-color: $blue;
+        border-radius: 80px;
+        content: "";
+        height: 10px;
+        left: 0px;
+        position: absolute;
+        z-index: 0;
+        transition: all 0.25s;
+        width: 80px;
+      }
+
+      &:before {
+        top: -30px;
+      }
+
+      &:after {
+        bottom: -30px;
+      }
+    }
+
+    nav {
+      box-sizing: border-box;
+      color: white;
+      font-size: 2rem;
+      width: 0px;
+      overflow: hidden;
+      display: flex;
+      justify-content: space-around;
+      height: 80px;
+      line-height: 80px;
+      opacity: 0;
+      transition: all 1s ease;
+
+      li {
+        width: 15%;
+        text-align: center;
+        cursor: pointer;
+
+        &:hover {
+          border-radius: 10px;
+          border: 3px solid rgb(0, 74, 110, .5);
+        }
+
+        &.navItemCode {
+          border-radius: 10px;
+          background-color: rgb(240, 248, 255, .2);
+          border: 3px solid rgb(0, 74, 110, .5);
+        }
+      }
+
+      &.shake {
+        width: 600px;
+        opacity: 1;
+      }
+    }
+  }
+
+}

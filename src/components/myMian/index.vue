@@ -1,5 +1,14 @@
 <template>
   <main ref="mianRef">
+    <section class="setction flex" @mousemove="onMove">
+      <div class="setction__left">
+        <article>
+          <h1>Hws Dreagreatger</h1>
+          <p>Let's start showing off some magic...</p>
+        </article>
+      </div>
+      <div class="setction__right"></div>
+    </section>
     <section class="setction flex">
       <div class="setction__left"></div>
       <div class="setction__right">
@@ -41,98 +50,55 @@
       <div class="setction__right"></div>
     </section>
   </main>
-
+  <!-- 可视化页面底部翻页图标 -->
+  <div class="bounce-1" v-show="isBounce"></div>
 </template>
 
 <script setup lang="ts">
-import { nextTick, onMounted, ref } from "vue-demi";
+import { nextTick, onMounted, ref, watch } from "vue-demi";
+import { useScroll } from "@/hooks/useScroll";
+
+// hooks
+const { listenerFunction, isBounce } = useScroll()
 
 const mianRef = ref()
+
+let scrollObj = {
+  sTop: 0
+}
+// props
+const props = defineProps({
+  navItem: {
+    type: Number,
+    default: 0
+  }
+})
+
+// 触发鼠标移动事件
+function onMove() {
+  listenerFunction()
+}
 
 function getMianHeight() {
   console.log(mianRef.value.children);
 }
 
 onMounted(() => {
-  getMianHeight()
+  // getMianHeight()
 })
+watch(() => props.navItem, (newValue, oldValue) => {
+  // console.log(mianRef.value.children);
+  // console.log(oldValue);
+  let dvalue = mianRef.value.children[newValue].offsetTop - mianRef.value.children[oldValue].offsetTop
+  scrollObj.sTop += mianRef.value.scrollTop + dvalue
+
+
+})
+
 defineExpose({
 })
 </script>
 
 <style lang="scss" scoped>
-// @import url(./index.scss);
-
-.setction {
-  width: 100vw;
-  height: 100vh;
-  min-height: 400px;
-  color: #fff;
-  padding-left: 10%;
-  padding-right: 10%;
-  box-sizing: border-box;
-  position: relative;
-
-  &:before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    top: 50%;
-    transform: translateY(-50%);
-    content: "";
-    font-size: 25.5rem;
-    color: rgba(255, 255, 255, .05);
-  }
-
-  &:nth-child(1) {
-    background-color: rgb(116, 68, 5);
-
-    &:before {
-      content: "HWC 01";
-    }
-  }
-
-  &:nth-child(2) {
-    background-color: rgb(5, 53, 116);
-
-    &:before {
-      content: "HWC 02";
-    }
-  }
-
-  &:nth-child(3) {
-    background-color: rgb(116, 68, 5);
-
-    &:before {
-      content: "HWC 03";
-    }
-  }
-
-  &:nth-child(4) {
-    background-color: rgb(5, 53, 116);
-
-    &:before {
-      content: "HWC 04";
-    }
-  }
-
-  h3 {
-    font-size: 4.1rem;
-  }
-
-  p {
-    font-size: 2rem;
-  }
-
-  &__right {
-    width: 50%;
-    float: left;
-  }
-
-  &__left {
-    width: 50%;
-    float: left;
-  }
-}
+@import "./index.scss";
 </style>
