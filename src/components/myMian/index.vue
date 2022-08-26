@@ -1,6 +1,6 @@
 <template>
-  <el-carousel ref="mianRef" height="1000px" direction="vertical" :autoplay="false">
-    <el-carousel-item class="setction flex">
+  <main ref="mianRef">
+    <section class="setction flex">
       <div class="setction__left"></div>
       <div class="setction__right">
         <article>
@@ -9,8 +9,8 @@
             Bunch the Brady Bunch that's the way we all became the Brady Bunch.</p>
         </article>
       </div>
-    </el-carousel-item>
-    <el-carousel-item class="setction flex">
+    </section>
+    <section class="setction flex">
       <div class="setction__left">
         <article>
           <h3>The weather started getting rough — the tiny ship was tossed.</h3>
@@ -19,8 +19,8 @@
         </article>
       </div>
       <div class="setction__right"></div>
-    </el-carousel-item>
-    <el-carousel-item class="setction flex">
+    </section>
+    <section class="setction flex">
       <div class="setction__left"></div>
       <div class="setction__right">
         <article>
@@ -29,8 +29,8 @@
             Bunch the Brady Bunch that's the way we all became the Brady Bunch.</p>
         </article>
       </div>
-    </el-carousel-item>
-    <el-carousel-item class="setction flex">
+    </section>
+    <section class="setction flex">
       <div class="setction__left">
         <article>
           <h3>The weather started getting rough — the tiny ship was tossed.</h3>
@@ -39,8 +39,8 @@
         </article>
       </div>
       <div class="setction__right"></div>
-    </el-carousel-item>
-  </el-carousel>
+    </section>
+  </main>
 
 </template>
 
