@@ -9,11 +9,15 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     ElCarousel: typeof import('element-plus/es')['ElCarousel']
     ElCarouselItem: typeof import('element-plus/es')['ElCarouselItem']
+    ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     MyCard: typeof import('./src/components/myCard/index.vue')['default']
     MyMian: typeof import('./src/components/myMian/index.vue')['default']
     MyNav: typeof import('./src/components/myNav.vue')['default']
     MySnow: typeof import('./src/components/mySnow.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+  }
+  export interface ComponentCustomProperties {
+    vInfiniteScroll: typeof import('element-plus/es')['ElInfiniteScroll']
   }
 }

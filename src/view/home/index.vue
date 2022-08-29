@@ -1,11 +1,5 @@
 <template>
   <div class="home-content">
-    <!-- <header class="flex">
-      <article>
-        <h1>Hws Dreagreatger</h1>
-        <p>Let's start showing off some magic...</p>
-      </article>
-    </header> -->
     <div class="navs">
       <nav :class="{ 'shake': show }">
         <li @click="navClickItem(index)" v-for="(item, index) in navObj" :key="index"
