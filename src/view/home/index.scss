@@ -19,7 +19,7 @@ $blue: rgb(7, 95, 167);
     transition: all .5s ease;
 
     &.maxHeight {
-      height: 650px;
+      height: 450px;
     }
 
     .icon-btn {
@@ -94,7 +94,7 @@ $blue: rgb(7, 95, 167);
       flex-direction: column;
       justify-content: space-evenly;
       width: 100px;
-      height: 600px;
+      // height: 600px;
       line-height: 80px;
       opacity: 0;
       transition: all .5s ease;
@@ -104,7 +104,6 @@ $blue: rgb(7, 95, 167);
         height: 15%;
         text-align: center;
         cursor: pointer;
-
         &:hover {
           border-radius: 10px;
           border: 3px solid rgb(0, 74, 110, .5);

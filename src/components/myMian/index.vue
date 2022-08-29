@@ -1,5 +1,5 @@
 <template>
-  <el-scrollbar ref="scrollbarRef" height="100vh" always @scroll="onScroll" class="content_main">
+  <el-scrollbar ref="scrollbarRef" height="100vh" @scroll="onScroll" class="content_main">
     <main ref="mainRef">
       <section v-for="(item, index) in contentArr" :key="index" class="setction flex" @mousemove="onMove">
         <div class="setction__left">
@@ -99,20 +99,21 @@ watch(() => props.navItem, (newValue, oldValue) => {
   scrollObj.oldHeight = mainRef.value!.children[newValue].clientHeight
 
   // 当前位置
-  scrollObj.oldTop = oldValue * scrollObj.oldHeight
+  scrollObj.oldTop = Math.ceil(oldValue * scrollObj.oldHeight)
   // 目标位置
-  scrollObj.newTop = Math.floor(newValue * scrollObj.newHeight)
+  scrollObj.newTop = Math.ceil(newValue * scrollObj.newHeight)
 
   // 两个滚动盒子之间的差值（总步长）
-  let total = scrollObj.newTop - scrollObj.oldTop
+  let difference = scrollObj.newTop - scrollObj.oldTop
   // 每步的长度
-  let step = total / 50
+  let step = Math.ceil(difference / 100)
   // step不能为负
   if (step < 0) step = -step
-  moveSlow(scrollObj.oldTop, scrollObj.newTop, step)
+  moveSlow(scrollObj.oldTop, scrollObj.newTop, (step))
 
 })
 watch(currtent, (newValue, oldValue) => {
+  console.log(currtent);
   emit('getIsNavClick', false)
   emit('getCurrtent', newValue)
 
