@@ -1,32 +1,31 @@
 <template>
   <el-scrollbar ref="scrollbarRef" height="100vh" always @scroll="onScroll" class="content_main">
-    <section v-for="(item, index) in contentArr" :key="index" class="setction flex" @mousemove="onMove">
-      <div class="setction__left">
-        <article>
-          <h3>{{ item.left_h }}</h3>
-          <p>{{ item.left_p }}</p>
-        </article>
-      </div>
-      <div class="setction__right">
-        <article>
-          <h3>{{ item.right_h }}</h3>
-          <p>{{ item.right_p }}</p>
-        </article>
-      </div>
-    </section>
+    <main ref="mainRef">
+      <section v-for="(item, index) in contentArr" :key="index" class="setction flex" @mousemove="onMove">
+        <div class="setction__left">
+          <article>
+            <h3>{{ item.left_h }}</h3>
+            <p>{{ item.left_p }}</p>
+          </article>
+        </div>
+        <div class="setction__right">
+          <article>
+            <h3>{{ item.right_h }}</h3>
+            <p>{{ item.right_p }}</p>
+          </article>
+        </div>
+      </section>
+    </main>
   </el-scrollbar>
   <!-- 可视化页面底部翻页图标 -->
-  <div class="bounce-1" v-show="isBounce"></div>
+  <div class="bounce-1" v-show="isBounce" @click="btnClick"></div>
 </template>
 
 <script setup lang="ts">
 import { nextTick, onMounted, ref, watch } from "vue";
 import { useScroll } from "@/hooks/useScroll";
 
-// hooks
-const { onScroll, isBounce, scrollbarRef } = useScroll()
-
-const load = ref(0)
+// 内容
 const contentArr = ref([
   {
     left_h: 'Hws Dreagreatger',
@@ -58,34 +57,64 @@ const contentArr = ref([
   },
 ])
 
+// 数据
 let scrollObj = {
-  sTop: 0
+  newHeight: 0,
+  oldHeight: 0,
+  newTop: 0,
+  oldTop: 0
 }
+
 // props
 const props = defineProps({
   navItem: {
     type: Number,
     default: 0
+  },
+  isNavClick: {
+    type: Boolean
   }
 })
 
+// emit
+const emit = defineEmits(['getCurrtent', 'getIsNavClick'])
+
+// hooks
+const { onScroll, currtent, isBounce, mainRef, scrollbarRef, moveSlow, btnClick } = useScroll()
 // 触发鼠标移动事件
 function onMove() {
 }
 
 function getMianHeight() {
-  console.log(scrollbarRef.value.children);
 }
 
 onMounted(() => {
   // getMianHeight()
 })
 watch(() => props.navItem, (newValue, oldValue) => {
-  // console.log(mianRef.value.children);
-  // console.log(oldValue);
-  let dvalue = scrollbarRef.value.children[newValue].offsetTop - scrollbarRef.value.children[oldValue].offsetTop
-  scrollObj.sTop += scrollbarRef.value.scrollTop + dvalue
+  if (!props.isNavClick) return
+  // 当前元素的高
+  scrollObj.newHeight = mainRef.value!.children[oldValue].clientHeight
+  // 目标元素的高
+  scrollObj.oldHeight = mainRef.value!.children[newValue].clientHeight
 
+  // 当前位置
+  scrollObj.oldTop = oldValue * scrollObj.oldHeight
+  // 目标位置
+  scrollObj.newTop = Math.floor(newValue * scrollObj.newHeight)
+
+  // 两个滚动盒子之间的差值（总步长）
+  let total = scrollObj.newTop - scrollObj.oldTop
+  // 每步的长度
+  let step = total / 50
+  // step不能为负
+  if (step < 0) step = -step
+  moveSlow(scrollObj.oldTop, scrollObj.newTop, step)
+
+})
+watch(currtent, (newValue, oldValue) => {
+  emit('getIsNavClick', false)
+  emit('getCurrtent', newValue)
 
 })
 

@@ -7,6 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    ElBacktop: typeof import('element-plus/es')['ElBacktop']
     ElCarousel: typeof import('element-plus/es')['ElCarousel']
     ElCarouselItem: typeof import('element-plus/es')['ElCarouselItem']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']

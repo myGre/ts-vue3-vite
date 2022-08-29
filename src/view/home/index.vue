@@ -1,16 +1,20 @@
 <template>
   <div class="home-content">
-    <div class="navs">
+    <!-- 导航 -->
+    <div class="navs" :class="{ 'maxHeight': show }">
       <nav :class="{ 'shake': show }">
         <li @click="navClickItem(index)" v-for="(item, index) in navObj" :key="index"
           :class="index == navItem ? 'navItemCode' : ''">{{ item }}</li>
       </nav>
-      <button class="icon-btn" ref="btnRef" @click="navShow">
-        <div class="icon"></div>
-      </button>
+      <div @click="navShow" class="btnDiv">
+        <button class="icon-btn" ref="btnRef">
+          <div class="icon"></div>
+        </button>
+      </div>
     </div>
     <!-- 内容区 -->
-    <my-mian ref="myMianRef" :navItem="navItem"></my-mian>
+    <my-mian ref="myMianRef" :isNavClick="isNavClick" @getIsNavClick="getIsNavClick" @getCurrtent="getCurrtent"
+      :navItem="navItem"></my-mian>
     <!-- footer -->
     <footer>
       <!-- 1756554@ccc.com -->
@@ -19,7 +23,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, nextTick, onMounted, ref, watch } from "vue-demi";
+import { computed, nextTick, onMounted, ref, watch } from "vue";
 import myMian from "../../components/myMian/index.vue"
 
 
@@ -28,13 +32,26 @@ const btnRef = ref()
 const myMianRef = ref() // mymain组件
 const navItem = ref<number>(0) // 当前导航
 const show = ref(false) // 是否显示导航栏
+// 是否开启导航跳转
+const isNavClick = ref(true)
 
+// 是否显示导航栏
 function navShow() {
   btnRef.value.classList.toggle("toggled")
   show.value = !show.value
 }
+// 获取当前盒子
+function getCurrtent(index: number) {
+  navItem.value = index
+}
+// 修改导航跳转状态
+function getIsNavClick(chonge: boolean) {
+  isNavClick.value = chonge
+}
+// 当前的导航
 function navClickItem(index: number) {
   // console.log(index);
+  isNavClick.value = true
   navItem.value = index
 }
 
