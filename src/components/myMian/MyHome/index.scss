@@ -1,6 +1,7 @@
 .setction {
   &:nth-child(1) {
-    background: #03293c;
+    background: url("@/assets/images/bg.jpg") no-repeat;
+    background-size: 100%;
     color: white;
 
     article {
