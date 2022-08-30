@@ -7,7 +7,6 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    copy: typeof import('./src/components/myMian/MyAlbum copy/index.vue')['default']
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     MyAlbum: typeof import('./src/components/myMian/MyAlbum/index.vue')['default']
     MyCard: typeof import('./src/components/myCard/index.vue')['default']
@@ -18,7 +17,6 @@ declare module '@vue/runtime-core' {
     MyNav: typeof import('./src/components/myNav.vue')['default']
     MySnow: typeof import('./src/components/mySnow.vue')['default']
     MyStudent: typeof import('./src/components/myMian/MyStudent/index.vue')['default']
-    MyStudentScolt: typeof import('./src/components/myMian/MyStudentScolt/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
