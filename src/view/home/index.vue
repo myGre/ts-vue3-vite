@@ -3,8 +3,10 @@
     <!-- 导航 -->
     <div class="navs" :class="{ 'maxHeight': show }">
       <nav :class="{ 'shake': show }">
-        <li @click="navClickItem(index)" v-for="(item, index) in navObj" :key="index"
-          :class="index == navItem ? 'navItemCode' : ''">{{ item }}</li>
+        <li @click="navClickItem(index)" v-for="(item, index) in navObj" :key="index" class="navItemCode">
+          <p>{{ item }}</p>
+        </li>
+        <div class="border_nav" :style="`transform: translate3d(0, ${offsettop}px, 0);`"></div>
       </nav>
       <div @click="navShow" class="btnDiv">
         <button class="icon-btn" ref="btnRef">
@@ -32,8 +34,18 @@ const btnRef = ref()
 const myMianRef = ref() // mymain组件
 const navItem = ref<number>(0) // 当前导航
 const show = ref(false) // 是否显示导航栏
+const offsettop = ref(0) // 边框divtop值
+
 // 是否开启导航跳转
 const isNavClick = ref(true)
+
+watch(navItem, (newValue, oldValue) => {
+  // console.log(newValue, oldValue);
+  let difference: number
+  difference = (newValue - oldValue) * 76
+  offsettop.value += difference
+
+})
 
 // 是否显示导航栏
 function navShow() {
