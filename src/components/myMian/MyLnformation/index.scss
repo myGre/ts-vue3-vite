@@ -1,59 +1,4 @@
-.content_main {
-  height: 100vh;
-  overflow-x: hidden;
-}
-
 .setction {
-  width: 100vw;
-  height: 100vh;
-  min-height: 400px;
-  color: #fff;
-  padding-left: 10%;
-  padding-right: 10%;
-  box-sizing: border-box;
-  position: relative;
-
-  &:before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    top: 50%;
-    transform: translateY(-50%);
-    content: "";
-    font-size: 25.5rem;
-    color: rgba(255, 255, 255, .05);
-  }
-
-  &:nth-child(1) {
-    // background-color: rgb(116, 68, 5);
-    background: #03293c;
-    color: white;
-
-    article {
-      padding-right: 50%;
-      // width: 30%;
-    }
-
-    h3 {
-      font-size: 9rem;
-      margin: 0 0 2.5rem;
-      line-height: 1em;
-    }
-
-    p {
-      margin-bottom: 2rem;
-    }
-  }
-
-  &:nth-child(2) {
-    background: url("@/assets/images/1.jpg") no-repeat;
-    background-size: 100%;
-
-    &:before {
-      content: "HWC 01";
-    }
-  }
 
   &:nth-child(3) {
     background: url("@/assets/images/2.jpg") no-repeat;
@@ -62,30 +7,6 @@
     &:before {
       content: "HWC 02";
     }
-  }
-
-  &:nth-child(4) {
-    background: url("@/assets/images/3.jpg") no-repeat;
-    background-size: 100%;
-
-    &:before {
-      content: "HWC 03";
-    }
-  }
-
-  &:nth-child(5) {
-    background: url("@/assets/images/4.jpg") no-repeat;
-    background-size: 100%;
-
-    &:before {
-      content: "HWC 04";
-    }
-  }
-
-  h1 {
-    font-size: 9rem;
-    margin: 0 0 2.5rem;
-    line-height: 1em;
   }
 
   h3 {
@@ -104,54 +25,5 @@
   &__left {
     width: 50%;
     float: left;
-  }
-}
-
-// 下翻图标
-.bounce-1 {
-  width: 40px;
-  height: 40px;
-  position: fixed;
-  // bottom: 80px;
-  left: 50%;
-  border-bottom: 3px solid rgba(255, 255, 255, 0.2);
-  border-right: 3px solid rgba(255, 255, 255, 0.2);
-  margin-left: -20px;
-  transform: translateY(0%) rotate(45deg);
-  animation: bounce-1 3s infinite normal;
-
-  &:before {
-    content: "";
-    position: absolute;
-    top: -20px;
-    left: -20px;
-    width: 40px;
-    height: 40px;
-    border-bottom: 3px solid rgba(255, 255, 255, 0.2);
-    border-right: 3px solid rgba(255, 255, 255, 0.2);
-  }
-
-  &::after {
-    content: "";
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    width: 40px;
-    height: 40px;
-    border-bottom: 3px solid rgba(255, 255, 255, 0.2);
-    border-right: 3px solid rgba(255, 255, 255, 0.2);
-  }
-}
-
-@keyframes bounce-1 {
-  0% {
-    opacity: 0;
-    bottom: 80px;
-  }
-
-  100% {
-    opacity: 1;
-    bottom: 40px;
-
   }
 }

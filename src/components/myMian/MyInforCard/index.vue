@@ -1,6 +1,8 @@
 <template>
   <section class="setction flex">
-    <div class="setction__left"></div>
+    <div class="setction__left">
+
+    </div>
     <div class="setction__right">
       <article>
         <h3>The weather started getting rough — the tiny ship was tossed.</h3>
