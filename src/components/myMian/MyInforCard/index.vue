@@ -1,58 +1,21 @@
 <template>
   <section class="setction">
     <div class="main_section">
-      <div class="movie_content" v-if="isCardOrDetail">
-        <div class="movie" @click.prevent="boxDetail">
-          <img src="https://github.com/supahfunk/supah-codepen/blob/master/movie-room.jpg?raw=true" alt=""
-            class="poster" />
-          <h3 class="title">Room</h3>
+      <div class="movie_content" :style="isCardOrDetail ? `opacity: 1;` : `opacity: 0;`">
+        <div class="movie" @click.prevent="boxDetail($event, index)" v-for="(item, index) in contentArr" :key="index">
+          <div class="poster" :style="`background: url(${item.src})`">
+            <!-- <img :src="item.src" alt="" /> -->
+          </div>
+          <h3 class="title">{{  item.title  }}</h3>
           <!-- <div class="desc">
-          Jack is a young boy of 5 years old who has lived all his life in one room. He believes everything within it
-          are
-          the only real things in the world. But what will happen when his Ma suddenly tells him that there are other
-          things outside of Room?
-        </div> -->
-        </div>
-        <div class="movie">
-          <img src="https://github.com/supahfunk/supah-codepen/blob/master/movie-whiplash.jpg?raw=true" alt=""
-            class="poster" />
-          <h3 class="title">Whiplash</h3>
-          <!-- <div class="desc">
-          Under the direction of a ruthless instructor, a talented young drummer begins to pursue perfection at any
-          cost,
-          even his humanity.
-        </div> -->
-        </div>
-        <div class="movie">
-          <img src="https://github.com/supahfunk/supah-codepen/blob/master/movie-madmax.jpg?raw=true" alt=""
-            class="poster" />
-          <h3 class="title">Mad Max</h3>
-          <!-- <div class="desc">
-          An apocalyptic story set in the furthest reaches of our planet, in a stark desert landscape where humanity is
-          broken, and most everyone is crazed fighting for the necessities of life. Within this world exist two rebels
-          on
-          the run who just might be able to restore order. There's Max, a man of action and a man of few words, who
-          seeks
-          peace of mind following the loss of his wife and child in the aftermath of the chaos.
-        </div> -->
-        </div>
-        <div class="movie">
-          <img src="https://github.com/supahfunk/supah-codepen/blob/master/movie-therevenant.jpg?raw=true" alt=""
-            class="poster" />
-          <h3 class="title">The Revenant</h3>
-          <!-- <div class="desc">
-          In the 1820s, a frontiersman, Hugh Glass, sets out on a path of vengeance against those who left him for dead
-          after a bear mauling.
         </div> -->
         </div>
       </div>
-      <div class="detail_section" v-else>
-        <!-- <svg class="close">
-          <use xlink:href="#close"></use>
-        </svg> -->
+      <div class="detail_section" :style="detail_show">
         <div class="movie">
-          <img src="https://github.com/supahfunk/supah-codepen/blob/master/movie-room.jpg?raw=true" alt=""
-            class="poster" />
+          <div class="poster">
+            <img src="https://github.com/supahfunk/supah-codepen/blob/master/movie-room.jpg?raw=true" alt="" />
+          </div>
           <div class="detail_text">
             <div class="cancel" @click="cancel">X</div>
             <h3 class="title">Room</h3>
@@ -74,16 +37,62 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 
+const contentArr = [
+  {
+    src: 'https://github.com/supahfunk/supah-codepen/blob/master/.jpg?raw=true',
+    title: 'Room',
+    desc:
+      `Jack is a young boy of 5 years old who has lived all his life in one room. He believes everything within it
+  are
+  the only real things in the world. But what will happen when his Ma suddenly tells him that there are other
+  things outside of Room?`
+  },
+  {
+    src: 'https://github.com/supahfunk/supah-codepen/blob/master/movie-whiplash.jpg?raw=true',
+    title: 'Room',
+    desc:
+      `Jack is a young boy of 5 years old who has lived all his life in one room. He believes everything within it
+  are
+  the only real things in the world. But what will happen when his Ma suddenly tells him that there are other
+  things outside of Room?`
+  },
+  {
+    src: 'https://github.com/supahfunk/supah-codepen/blob/master/movie-madmax.jpg?raw=true',
+    title: 'Room',
+    desc:
+      `Jack is a young boy of 5 years old who has lived all his life in one room. He believes everything within it
+  are
+  the only real things in the world. But what will happen when his Ma suddenly tells him that there are other
+  things outside of Room?`
+  },
+  {
+    src: 'https://github.com/supahfunk/supah-codepen/blob/master/movie-therevenant.jpg?raw=true',
+    title: 'Room',
+    desc:
+      `Jack is a young boy of 5 years old who has lived all his life in one room. He believes everything within it
+  are
+  the only real things in the world. But what will happen when his Ma suddenly tells him that there are other
+  things outside of Room?`
+  },
+]
 
-const isCardOrDetail = ref(true)
+const isCardOrDetail = ref(false)
 
-function boxDetail() {
-  isCardOrDetail.value = false
+// 显示或隐藏详情弹窗
+const detail_show = computed(() => {
+  return isCardOrDetail.value ? `display: block` : ''
+})
+
+function boxDetail(el: any, index: number) {
+  console.log(el);
+  console.log(index);
+
+  isCardOrDetail.value = true
 }
 function cancel() {
-  isCardOrDetail.value = true
+  isCardOrDetail.value = false
 }
 </script>
 
@@ -102,7 +111,7 @@ function cancel() {
     .movie_content {
       position: absolute;
       width: 80%;
-      height: 80%;
+      height: 60%;
       top: 50%;
       left: 50%;
       transform: translate3d(-50%, -50%, 0);
@@ -111,25 +120,34 @@ function cancel() {
       justify-content: space-around;
       align-items: flex-end;
       text-align: center;
+      transition: all .4s cubic-bezier(.67, .13, .1, .81);
 
       .movie {
+
         .title {
-          margin-top: -70px;
-          opacity: .5;
+          // margin-top: -70px;
+          // opacity: .5;
         }
 
         .poster {
-          width: 80%;
-          border-radius: 15px;
-          opacity: .8;
+          width: 90%;
+          margin: 0 auto;
+
+          img {
+            // width: 80%;
+            width: 100%;
+            border-radius: 15px;
+            opacity: .8;
+          }
         }
       }
     }
 
     .detail_section {
+      display: none;
       position: absolute;
       width: 80%;
-      height: 80%;
+      height: 60%;
       top: 50%;
       left: 50%;
       transform: translate3d(-50%, -50%, 0);
@@ -147,15 +165,19 @@ function cancel() {
           width: 35%;
           border-radius: 15px;
           position: absolute;
-          // top: -30px;
+          top: -30px;
           left: -30px;
+
+          img {
+            width: 80%;
+            border-radius: 15px;
+          }
         }
 
         .detail_text {
           position: absolute;
-          left: 31.5%;
+          left: 32.5%;
           // top: -30px;
-          // height: 100%;
           background-color: rgb(46, 85, 46, .2);
           padding: 30px;
 
@@ -172,6 +194,57 @@ function cancel() {
         }
       }
     }
+
+    // .ativce {
+    //   display: block;
+    //   position: absolute;
+    //   width: 80%;
+    //   height: 60%;
+    //   top: 50%;
+    //   left: 50%;
+    //   transform: translate3d(-50%, -50%, 0);
+    //   background-color: rgb(46, 85, 46, .2);
+
+    //   .movie {
+    //     display: flex;
+    //     justify-content: space-between;
+    //     position: relative;
+
+    //     .poster {
+    //       width: 35%;
+    //       border-radius: 15px;
+    //       position: absolute;
+    //       top: -30px;
+    //       left: -30px;
+
+    //       img {
+    //         width: 100%;
+    //         border-radius: 15px;
+    //       }
+    //     }
+
+    //     .detail_text {
+    //       position: absolute;
+    //       left: 32.5%;
+    //       // top: -30px;
+    //       background-color: rgb(46, 85, 46, .2);
+    //       padding: 30px;
+
+    //       .cancel {
+    //         position: absolute;
+    //         right: 20px;
+    //         top: 20px;
+    //         cursor: pointer;
+    //       }
+
+    //       .desc {
+    //         text-indent: 2em;
+    //       }
+    //     }
+    //   }
+    // }
   }
 }
+
+@keyframes detail {}
 </style>
