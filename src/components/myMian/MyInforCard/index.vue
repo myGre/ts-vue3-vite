@@ -1,33 +1,33 @@
 <template>
-  <section class="setction">
+  <section class="setction" @click.stop="cancel">
     <div class="main_section">
-      <div class="movie_content" :style="isCardOrDetail ? `opacity: 1;` : `opacity: 0;`">
-        <div class="movie" @click.prevent="boxDetail($event, index)" v-for="(item, index) in contentArr" :key="index">
-          <div class="poster" :style="`background: url(${item.src})`">
-            <!-- <img :src="item.src" alt="" /> -->
+      <div class="movie_content" @click.stop ref="movieRef" :style="isShow ? `opacity: 1;` : `opacity: 0;`">
+        <div class="movie" @click.stop="boxDetail($event, index)" v-for="(item, index) in contentArr" :key="index">
+          <div class="poster">
+            <img :src="item.src" alt="" />
           </div>
           <h3 class="title">{{  item.title  }}</h3>
           <!-- <div class="desc">
         </div> -->
         </div>
       </div>
-      <div class="detail_section" :style="detail_show">
-        <div class="movie">
-          <div class="poster">
-            <img src="https://github.com/supahfunk/supah-codepen/blob/master/movie-room.jpg?raw=true" alt="" />
+      <!-- 详情 -->
+      <div ref="detailRef" class="detail_section" :style="`${detail_show};`">
+        <div ref="detailMovieRef" class="movie"
+          :style="`width: ${elWidth}%; top:${offsetTop}px; left:${offsetleft}px;`">
+          <div class="poster" :style="`width: ${posterWidht}%;`">
+            <img :src="contentArr[itemIndex].src" alt="" :style="`width: ${imgWidht}%;`" />
           </div>
-          <div class="detail_text">
-            <div class="cancel" @click="cancel">X</div>
-            <h3 class="title">Room</h3>
+          <h3 class="title">Room</h3>
+          <div class="detail_text" :style="`left:${detail_textLeft}%; opacity: ${detail_opacity};`">
+            <div class="cancel" @click.stop="cancel">X</div>
+            <h3>{{  contentArr[itemIndex].title  }}</h3>
             <!-- <div class="info">
               <span class="length">117 min</span>
               <span class="year">2015</span>
             </div> -->
             <p class="desc">
-              Jack is a young boy of 5 years old who has lived all his life in one room. He believes everything within
-              it
-              are the only real things in the world. But what will happen when his Ma suddenly tells him that there are
-              other things outside of Room?
+              {{  contentArr[itemIndex].desc  }}
             </p>
           </div>
         </div>
@@ -37,11 +37,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 
 const contentArr = [
   {
-    src: 'https://github.com/supahfunk/supah-codepen/blob/master/.jpg?raw=true',
+    src: 'https://github.com/supahfunk/supah-codepen/blob/master/movie-room.jpg?raw=true',
     title: 'Room',
     desc:
       `Jack is a young boy of 5 years old who has lived all his life in one room. He believes everything within it
@@ -79,172 +79,69 @@ const contentArr = [
 ]
 
 const isCardOrDetail = ref(false)
+const isShow = ref(true)
+let itemIndex = ref(0) // 当前图片
+const movieRef = ref()
+const offsetleft = ref(0) // 详情页位移目标值
+const offsetTop = ref(0) // 详情页目标top值
+const elWidth = ref(0) // 详情页内盒子宽度
+const posterWidht = ref(0) // 图片盒子宽度
+const imgWidht = ref(0) // 图片宽度
+const detail_textLeft = ref(0) // 文字框left值
+const detail_opacity = ref(0)
+const detail_transition = ref() //
 
 // 显示或隐藏详情弹窗
 const detail_show = computed(() => {
-  return isCardOrDetail.value ? `display: block` : ''
+  return isCardOrDetail.value ? `display: flex` : ''
 })
 
 function boxDetail(el: any, index: number) {
-  console.log(el);
-  console.log(index);
-
+  itemIndex.value = index
+  offsetleft.value = movieRef.value.children[index].offsetLeft;
+  offsetTop.value = movieRef.value.children[index].offsetTop;
+  elWidth.value = 60
+  detail_textLeft.value = 0
+  detail_opacity.value = 0
+  detail_transition.value = `all .7s cubic-bezier(.67, .13, .1, .81);`
+  setTimeout(() => {
+    offsetleft.value = -30
+    offsetTop.value = 0
+    elWidth.value = 100
+    posterWidht.value = 35
+    imgWidht.value = 80
+    detail_textLeft.value = 30
+    detail_opacity.value = 1
+  }, 10)
+  isShow.value = false
   isCardOrDetail.value = true
+
+
 }
+
 function cancel() {
+  console.log(itemIndex);
+  offsetleft.value = -30
+  offsetTop.value = 0
+  elWidth.value = 100
+  posterWidht.value = 35
+  imgWidht.value = 80
+  detail_textLeft.value = 30
+  detail_transition.value = `all 0s `
+  setTimeout(() => {
+    offsetleft.value = movieRef.value.children[itemIndex.value].offsetLeft;
+    offsetTop.value = movieRef.value.children[itemIndex.value].offsetTop;
+    elWidth.value = 60
+    detail_textLeft.value = 0
+    detail_opacity.value = 0
+  }, 10)
+  isShow.value = true
+  // setTimeout(() => {
   isCardOrDetail.value = false
+  // }, 700)
 }
 </script>
 
 <style lang="scss" scoped>
 @import "./index.scss";
-
-.setction {
-
-  .main_section {
-    width: 100%;
-    height: 100%;
-    background-color: rgb(167, 167, 167, .5);
-    // text-align: center;
-    position: relative;
-
-    .movie_content {
-      position: absolute;
-      width: 80%;
-      height: 60%;
-      top: 50%;
-      left: 50%;
-      transform: translate3d(-50%, -50%, 0);
-      background-color: rgb(46, 85, 46, .2);
-      display: flex;
-      justify-content: space-around;
-      align-items: flex-end;
-      text-align: center;
-      transition: all .4s cubic-bezier(.67, .13, .1, .81);
-
-      .movie {
-
-        .title {
-          // margin-top: -70px;
-          // opacity: .5;
-        }
-
-        .poster {
-          width: 90%;
-          margin: 0 auto;
-
-          img {
-            // width: 80%;
-            width: 100%;
-            border-radius: 15px;
-            opacity: .8;
-          }
-        }
-      }
-    }
-
-    .detail_section {
-      display: none;
-      position: absolute;
-      width: 80%;
-      height: 60%;
-      top: 50%;
-      left: 50%;
-      transform: translate3d(-50%, -50%, 0);
-      background-color: rgb(46, 85, 46, .2);
-
-      // display: flex;
-      // justify-content: space-around;
-      // text-align: center;
-      .movie {
-        display: flex;
-        justify-content: space-between;
-        position: relative;
-
-        .poster {
-          width: 35%;
-          border-radius: 15px;
-          position: absolute;
-          top: -30px;
-          left: -30px;
-
-          img {
-            width: 80%;
-            border-radius: 15px;
-          }
-        }
-
-        .detail_text {
-          position: absolute;
-          left: 32.5%;
-          // top: -30px;
-          background-color: rgb(46, 85, 46, .2);
-          padding: 30px;
-
-          .cancel {
-            position: absolute;
-            right: 20px;
-            top: 20px;
-            cursor: pointer;
-          }
-
-          .desc {
-            text-indent: 2em;
-          }
-        }
-      }
-    }
-
-    // .ativce {
-    //   display: block;
-    //   position: absolute;
-    //   width: 80%;
-    //   height: 60%;
-    //   top: 50%;
-    //   left: 50%;
-    //   transform: translate3d(-50%, -50%, 0);
-    //   background-color: rgb(46, 85, 46, .2);
-
-    //   .movie {
-    //     display: flex;
-    //     justify-content: space-between;
-    //     position: relative;
-
-    //     .poster {
-    //       width: 35%;
-    //       border-radius: 15px;
-    //       position: absolute;
-    //       top: -30px;
-    //       left: -30px;
-
-    //       img {
-    //         width: 100%;
-    //         border-radius: 15px;
-    //       }
-    //     }
-
-    //     .detail_text {
-    //       position: absolute;
-    //       left: 32.5%;
-    //       // top: -30px;
-    //       background-color: rgb(46, 85, 46, .2);
-    //       padding: 30px;
-
-    //       .cancel {
-    //         position: absolute;
-    //         right: 20px;
-    //         top: 20px;
-    //         cursor: pointer;
-    //       }
-
-    //       .desc {
-    //         text-indent: 2em;
-    //       }
-    //     }
-    //   }
-    // }
-  }
-}
-
-@keyframes detail {}
 </style>

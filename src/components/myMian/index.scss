@@ -62,6 +62,10 @@
   }
 }
 
+.bounce-1:hover {
+  animation: bounce-2 1s infinite normal;
+}
+
 @keyframes bounce-1 {
   0% {
     opacity: 0;
@@ -72,5 +76,22 @@
     opacity: 1;
     bottom: 40px;
 
+  }
+}
+
+@keyframes bounce-2 {
+  0% {
+    opacity: 0;
+    bottom: 80px;
+    // box-shadow: #fff 1 1;
+    // background-color: #fff;
+
+  }
+
+  100% {
+    opacity: 1;
+    bottom: 40px;
+    // border-bottom: 3px solid #fff;
+    // border-right: 3px solid #fff;
   }
 }
