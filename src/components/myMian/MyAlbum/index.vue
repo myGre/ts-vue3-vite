@@ -4,7 +4,8 @@
       <!-- 相册 -->
       <div class="img_MaxBox" ref="img_MaxBoxRef">
         <div class="imgBox" ref="imgBoxRef">
-          <img v-for="(item, index) in imgArr[currentItem]" :key="index" class="img" :src="item" alt="">
+          <img v-for="(item, index) in imgArr[currentItem]" :key="index" class="img" :src="item" alt=""
+            :style="`width: ${widthArr[index - 1]}%; ${imgOffsetArr[index - 1]}}`">
         </div>
       </div>
       <!-- 导航 -->
@@ -58,17 +59,17 @@ const imgArr: Array<any> = [
 const currentItem = ref(0) // 当前导航
 
 // hooks
-const { img_MaxBoxRef, imgBoxRef, getOffset, getWidth } = useAlbum()
+const { img_MaxBoxRef, imgBoxRef, getOffsetOrWidth, widthArr, imgOffsetArr } = useAlbum()
 
 function clickNavItem(index: number) {
-  currentItem.value = index
+  currentItem.value = index;
   // 图片的数量
-  let imglenght = 0
+  let imglenght = 0;
   for (let i in imgArr[index]) {
-    imglenght++
+    imglenght++;
   }
-  getOffset(index, imglenght) // 获取当前盒子中图片的随机offset
-  getWidth(index, imglenght) // 获取当前盒子中图片的宽度
+  // 获取当前盒子中图片的随机offset或盒子中图片的宽度
+  getOffsetOrWidth(index, imglenght);
 }
 
 onMounted(() => {
@@ -94,38 +95,14 @@ onMounted(() => {
       position: relative;
       width: 30%;
       height: 30%;
-      top: 30%;
+      top: 50%;
       left: 50%;
-      transform: translate(-50%, -30%);
-      // background-color: aliceblue;
+      transform: translate(-50%, -50%);
 
       .img {
         width: 0;
         position: absolute;
         transition: all 1s;
-
-        &:nth-child(1) {
-          // width: 20%;
-          left: -120%;
-          top: -70%;
-        }
-
-        &:nth-child(2) {
-          // width: 25%;
-
-        }
-
-        &:nth-child(3) {
-          // width: 30%;
-          left: -120%;
-          top: -70%;
-        }
-
-        &:nth-child(4) {
-          // width: 30%;
-          left: -120%;
-          bottom: -160%;
-        }
       }
     }
   }
