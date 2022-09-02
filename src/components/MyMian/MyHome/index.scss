@@ -1,0 +1,33 @@
+.setction {
+  &:nth-child(1) {
+    background: url("@/assets/images/bg.jpg") no-repeat;
+    background-size: 100%;
+    color: white;
+
+    article {
+      padding-right: 50%;
+      // width: 30%;
+    }
+  }
+
+  h1 {
+    font-size: 9rem;
+    margin: 0 0 2.5rem;
+    line-height: 1em;
+  }
+
+  p {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  &__right {
+    width: 50%;
+    float: left;
+  }
+
+  &__left {
+    width: 50%;
+    float: left;
+  }
+}

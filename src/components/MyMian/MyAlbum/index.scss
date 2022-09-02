@@ -1,0 +1,29 @@
+.setction {
+
+  &:nth-child(4) {
+    background: url("@/assets/images/3.jpg") no-repeat;
+    background-size: 100%;
+
+    &:before {
+      content: "HWC 03";
+    }
+  }
+
+  h3 {
+    font-size: 4.1rem;
+  }
+
+  p {
+    font-size: 2rem;
+  }
+
+  &__right {
+    width: 40%;
+    float: left;
+  }
+
+  &__left {
+    width: 60%;
+    float: left;
+  }
+}
