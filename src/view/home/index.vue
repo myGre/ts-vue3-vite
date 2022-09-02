@@ -4,7 +4,7 @@
     <div class="navs" :class="{ 'maxHeight': show }">
       <nav :class="{ 'shake': show }">
         <li @click="navClickItem(index)" v-for="(item, index) in navObj" :key="index" class="navItemCode">
-          <p>{{ item }}</p>
+          <p>{{  item  }}</p>
         </li>
         <div class="border_nav" :style="`transform: translate3d(0, ${offsettop}px, 0);`"></div>
       </nav>
@@ -26,7 +26,7 @@
 
 <script setup lang="ts">
 import { computed, nextTick, onMounted, ref, watch } from "vue";
-import myMian from "../../components/myMian/index.vue"
+import MyMian from "@/components/MyMian/index.vue"
 
 
 const navObj = ref(["home", "资料卡", "个人信息", "相册", "学籍"])

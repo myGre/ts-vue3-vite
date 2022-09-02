@@ -5,7 +5,7 @@
       <div class="img_MaxBox" ref="img_MaxBoxRef">
         <div class="imgBox" ref="imgBoxRef">
           <img v-for="(item, index) in imgArr[currentItem]" :key="index" class="img" :src="item" alt=""
-            :style="`width: ${widthArr[index - 1]}%; ${imgOffsetArr[index - 1]}}`">
+            :style="`${imgOffsetAndWidthArr[index - 1]}}`">
         </div>
       </div>
       <!-- 导航 -->
@@ -59,22 +59,19 @@ const imgArr: Array<any> = [
     4: "https://ivang-design.com/svg-load/slider/16.jpg",
   }
 ]
-const currentItem = ref(0) // 当前导航
 
 // hooks
-const { img_MaxBoxRef, imgBoxRef, getOffsetOrWidth, widthArr, imgOffsetArr } = useAlbum()
+const { img_MaxBoxRef, currentItem, imgBoxRef, getOffsetOrWidth, imgOffsetAndWidthArr } = useAlbum()
 
 function clickNavItem(index: number) {
+  // console.log(index);
+
   if (index === currentItem.value) return
   currentItem.value = index;
   // 图片的数量
   let imglenght = 0;
   for (let i in imgArr[index]) {
     imglenght++;
-  }
-  // 初始化宽和offset
-  for (let i = 0; i < imglenght; i++) {
-    widthArr.value.push(0)
   }
   // 获取当前盒子中图片的随机offset或盒子中图片的宽度
   setTimeout(() => {
@@ -83,11 +80,8 @@ function clickNavItem(index: number) {
 }
 
 onMounted(() => {
-  // widthArr.value.push(0)
-  // // 获取当前盒子中图片的随机offset或盒子中图片的宽度
-  // setTimeout(() => {
-  //   getOffsetOrWidth(1, 4);
-  // }, 10)
+  // 获取当前盒子中图片的随机offset或盒子中图片的宽度
+  getOffsetOrWidth(0, 4);
 })
 </script>
 

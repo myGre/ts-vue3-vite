@@ -21,11 +21,11 @@
 <script setup lang="ts">
 import { nextTick, onMounted, ref, watch, toRefs, reactive } from "vue";
 import { useScroll } from "@/hooks/useScroll";
-import MyHome from "./MyHome/index.vue";
-import MyInforCard from "./MyInforCard/index.vue";
-import MyLnformation from "./MyLnformation/index.vue";
-import MyAlbum from "./MyAlbum/index.vue";
-import MyStudent from "./MyStudent/index.vue"
+import MyHome from "@/components/MyMian/MyHome/index.vue";
+import MyInforCard from "@/components/MyMian/MyInforCard/index.vue";
+import MyLnformation from "@/components/MyMian/MyLnformation/index.vue";
+import MyAlbum from "@/components/MyMian/MyAlbum/index.vue";
+import MyStudent from "@/components/MyMian/MyStudent/index.vue"
 
 // 滚动数据
 let scrollObj = {
