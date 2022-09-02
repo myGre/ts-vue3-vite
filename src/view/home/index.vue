@@ -4,7 +4,7 @@
     <div class="navs" :class="{ 'maxHeight': show }">
       <nav :class="{ 'shake': show }">
         <li @click="navClickItem(index)" v-for="(item, index) in navObj" :key="index" class="navItemCode">
-          <p>{{ item }}</p>
+          <p>{{  item  }}</p>
         </li>
         <div class="border_nav" :style="`transform: translate3d(0, ${offsettop}px, 0);`"></div>
       </nav>
@@ -15,8 +15,7 @@
       </div>
     </div>
     <!-- 内容区 -->
-    <my-mian ref="myMianRef" :isNavClick="isNavClick" @getIsNavClick="getIsNavClick" @getCurrtent="getCurrtent"
-      :navItem="navItem"></my-mian>
+    <my-mian ref="myMianRef" @getCurrtent="getCurrtent" :navItem="navItem" :navObj="navObj"></my-mian>
     <!-- footer -->
     <footer>
       <!-- 1756554@ccc.com -->
@@ -36,8 +35,8 @@ const navItem = ref<number>(0) // 当前导航
 const show = ref(false) // 是否显示导航栏
 const offsettop = ref(0) // 边框divtop值
 
-// 是否开启导航跳转
-const isNavClick = ref(true)
+// // 是否开启导航跳转
+// const isNavClick = ref(true)
 
 watch(navItem, (newValue, oldValue) => {
   // console.log(newValue, oldValue);
@@ -56,14 +55,14 @@ function navShow() {
 function getCurrtent(index: number) {
   navItem.value = index
 }
-// 修改导航跳转状态
-function getIsNavClick(chonge: boolean) {
-  isNavClick.value = chonge
-}
-// 当前的导航
+// // 修改导航跳转状态
+// function getIsNavClick(chonge: boolean) {
+//   isNavClick.value = chonge
+// }
+// // 当前的导航
 function navClickItem(index: number) {
   // console.log(index);
-  isNavClick.value = true
+  // isNavClick.value = true
   navItem.value = index
 }
 
