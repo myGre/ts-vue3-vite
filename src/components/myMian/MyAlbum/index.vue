@@ -9,10 +9,13 @@
         </div>
       </div>
       <!-- 导航 -->
-      <ul class="albumNav">
-        <li v-for="(item, index) in albumNavArr" :key="index" class="navTitle" @click="clickNavItem(index)">{{  item  }}
-        </li>
-      </ul>
+      <div class="albumNav">
+        <ul class="ul">
+          <li v-for="(item, index) in albumNavArr" :key="index" class="navTitle" @click="clickNavItem(index)">{{  item  }}
+          </li>
+        </ul>
+        <div class="navBorder"></div>
+      </div>
     </div>
     <!-- 介绍 -->
     <div class="setction__right">
@@ -62,18 +65,29 @@ const currentItem = ref(0) // 当前导航
 const { img_MaxBoxRef, imgBoxRef, getOffsetOrWidth, widthArr, imgOffsetArr } = useAlbum()
 
 function clickNavItem(index: number) {
+  if (index === currentItem.value) return
   currentItem.value = index;
   // 图片的数量
   let imglenght = 0;
   for (let i in imgArr[index]) {
     imglenght++;
   }
+  // 初始化宽和offset
+  for (let i = 0; i < imglenght; i++) {
+    widthArr.value.push(0)
+  }
   // 获取当前盒子中图片的随机offset或盒子中图片的宽度
-  getOffsetOrWidth(index, imglenght);
+  setTimeout(() => {
+    getOffsetOrWidth(index, imglenght);
+  }, 10)
 }
 
 onMounted(() => {
-
+  // widthArr.value.push(0)
+  // // 获取当前盒子中图片的随机offset或盒子中图片的宽度
+  // setTimeout(() => {
+  //   getOffsetOrWidth(1, 4);
+  // }, 10)
 })
 </script>
 
@@ -103,6 +117,26 @@ onMounted(() => {
         width: 0;
         position: absolute;
         transition: all 1s;
+
+        &:nth-child(1) {
+          left: 50%;
+          top: 50%;
+        }
+
+        &:nth-child(2) {
+          right: 50%;
+          top: 50%;
+        }
+
+        &:nth-child(3) {
+          left: 50%;
+          bottom: 50%;
+        }
+
+        &:nth-child(4) {
+          right: 50%;
+          bottom: 50%;
+        }
       }
     }
   }
@@ -113,6 +147,14 @@ onMounted(() => {
     left: 60%;
     transform: translate(-60%, -50%);
     z-index: 30;
+
+    // .ul {
+    //   position: absolute;
+    //   top: 0;
+    //   left: 0;
+    //   display: flex;
+    //   flex-direction: column;
+    //   width: 100%;
 
     .navTitle {
       cursor: pointer;
@@ -125,6 +167,8 @@ onMounted(() => {
         color: rgb(201, 201, 201);
       }
     }
+
+    .navBorder {}
   }
 }
 </style>

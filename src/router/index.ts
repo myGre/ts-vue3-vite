@@ -21,6 +21,4 @@ const router = createRouter({
   scrollBehavior: () => ({ left: 0, top: 0 })
 })
 
-
-
 export default router
