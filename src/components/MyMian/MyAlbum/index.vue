@@ -162,7 +162,25 @@ onMounted(() => {
       }
     }
 
-    .navBorder {}
+    .navBorder {
+      position: absolute;
+      top: 20%;
+      left: 55%;
+      width: 2rem;
+      height: 0.7rem;
+      opacity: 1;
+      background-color: rgb(53, 134, 241);
+      border-radius: 30px;
+      transition: all .7s;
+
+      &:hover {
+        width: 16rem;
+        left: 18%;
+        opacity: 1;
+        background-color: rgb(20, 93, 187);
+
+      }
+    }
   }
 }
 </style>
