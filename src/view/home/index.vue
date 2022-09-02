@@ -4,7 +4,7 @@
     <div class="navs" :class="{ 'maxHeight': show }">
       <nav :class="{ 'shake': show }">
         <li @click="navClickItem(index)" v-for="(item, index) in navObj" :key="index" class="navItemCode">
-          <p>{{ item }}</p>
+          <p>{{  item  }}</p>
         </li>
         <div class="border_nav" :style="`transform: translate3d(0, ${offsettop}px, 0);`"></div>
       </nav>
