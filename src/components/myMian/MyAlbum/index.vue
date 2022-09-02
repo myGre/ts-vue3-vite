@@ -4,14 +4,18 @@
       <!-- 相册 -->
       <div class="img_MaxBox" ref="img_MaxBoxRef">
         <div class="imgBox" ref="imgBoxRef">
-          <img v-for="(item, index) in imgArr[currentItem]" :key="index" class="img" :src="item" alt="">
+          <img v-for="(item, index) in imgArr[currentItem]" :key="index" class="img" :src="item" alt=""
+            :style="`width: ${widthArr[index - 1]}%; ${imgOffsetArr[index - 1]}}`">
         </div>
       </div>
       <!-- 导航 -->
-      <ul class="albumNav">
-        <li v-for="(item, index) in albumNavArr" :key="index" class="navTitle" @click="clickNavItem(index)">{{  item  }}
-        </li>
-      </ul>
+      <div class="albumNav">
+        <ul class="ul">
+          <li v-for="(item, index) in albumNavArr" :key="index" class="navTitle" @click="clickNavItem(index)">{{  item  }}
+          </li>
+        </ul>
+        <div class="navBorder"></div>
+      </div>
     </div>
     <!-- 介绍 -->
     <div class="setction__right">
@@ -58,21 +62,32 @@ const imgArr: Array<any> = [
 const currentItem = ref(0) // 当前导航
 
 // hooks
-const { img_MaxBoxRef, imgBoxRef, getOffset, getWidth } = useAlbum()
+const { img_MaxBoxRef, imgBoxRef, getOffsetOrWidth, widthArr, imgOffsetArr } = useAlbum()
 
 function clickNavItem(index: number) {
-  currentItem.value = index
+  if (index === currentItem.value) return
+  currentItem.value = index;
   // 图片的数量
-  let imglenght = 0
+  let imglenght = 0;
   for (let i in imgArr[index]) {
-    imglenght++
+    imglenght++;
   }
-  getOffset(index, imglenght) // 获取当前盒子中图片的随机offset
-  getWidth(index, imglenght) // 获取当前盒子中图片的宽度
+  // 初始化宽和offset
+  for (let i = 0; i < imglenght; i++) {
+    widthArr.value.push(0)
+  }
+  // 获取当前盒子中图片的随机offset或盒子中图片的宽度
+  setTimeout(() => {
+    getOffsetOrWidth(index, imglenght);
+  }, 10)
 }
 
 onMounted(() => {
-
+  // widthArr.value.push(0)
+  // // 获取当前盒子中图片的随机offset或盒子中图片的宽度
+  // setTimeout(() => {
+  //   getOffsetOrWidth(1, 4);
+  // }, 10)
 })
 </script>
 
@@ -94,10 +109,9 @@ onMounted(() => {
       position: relative;
       width: 30%;
       height: 30%;
-      top: 30%;
+      top: 50%;
       left: 50%;
-      transform: translate(-50%, -30%);
-      // background-color: aliceblue;
+      transform: translate(-50%, -50%);
 
       .img {
         width: 0;
@@ -105,26 +119,23 @@ onMounted(() => {
         transition: all 1s;
 
         &:nth-child(1) {
-          // width: 20%;
-          left: -120%;
-          top: -70%;
+          left: 50%;
+          top: 50%;
         }
 
         &:nth-child(2) {
-          // width: 25%;
-
+          right: 50%;
+          top: 50%;
         }
 
         &:nth-child(3) {
-          // width: 30%;
-          left: -120%;
-          top: -70%;
+          left: 50%;
+          bottom: 50%;
         }
 
         &:nth-child(4) {
-          // width: 30%;
-          left: -120%;
-          bottom: -160%;
+          right: 50%;
+          bottom: 50%;
         }
       }
     }
@@ -137,6 +148,14 @@ onMounted(() => {
     transform: translate(-60%, -50%);
     z-index: 30;
 
+    // .ul {
+    //   position: absolute;
+    //   top: 0;
+    //   left: 0;
+    //   display: flex;
+    //   flex-direction: column;
+    //   width: 100%;
+
     .navTitle {
       cursor: pointer;
       color: rgb(201, 201, 201, .5);
@@ -148,6 +167,8 @@ onMounted(() => {
         color: rgb(201, 201, 201);
       }
     }
+
+    .navBorder {}
   }
 }
 </style>
