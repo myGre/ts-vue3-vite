@@ -11,10 +11,11 @@
       <!-- 导航 -->
       <div class="albumNav">
         <ul class="ul">
-          <li v-for="(item, index) in albumNavArr" :key="index" class="navTitle" @click="clickNavItem(index)">{{  item  }}
+          <li v-for="(item, index) in albumNavArr" :key="index" class="navTitle" @click="clickNavItem(index)">
+            <h3 :class="{ 'titleColor': currentItem == index }">{{ item }}</h3>
+            <div class="navBorder" :class="{ 'BorderAnimation': currentItem == index }"></div>
           </li>
         </ul>
-        <div class="navBorder"></div>
       </div>
     </div>
     <!-- 介绍 -->
@@ -29,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import useAlbum from "@/hooks/useAlbum"
 // 导航信息
 const albumNavArr: Array<string> = ['生活', '风景', '个人', '夜晚']
@@ -59,10 +60,14 @@ const imgArr: Array<any> = [
     4: "https://ivang-design.com/svg-load/slider/16.jpg",
   }
 ]
-
 // hooks
 const { img_MaxBoxRef, currentItem, imgBoxRef, getOffsetOrWidth, imgOffsetAndWidthArr } = useAlbum()
 
+
+// 导航下边框动画
+const BorderAnimation = computed(() => {
+
+})
 function clickNavItem(index: number) {
   // console.log(index);
 
@@ -151,35 +156,37 @@ onMounted(() => {
     //   width: 100%;
 
     .navTitle {
-      cursor: pointer;
-      color: rgb(201, 201, 201, .5);
-      font-size: 7.1rem;
-      margin-bottom: 20px;
-      transition: all .5s;
+      h3 {
+        cursor: pointer;
+        font-size: 7.1rem;
+        transition: all .7s;
+        line-height: 11rem;
+        margin: 0;
+        color: rgb(201, 201, 201, .5);
 
-      &:hover {
-        color: rgb(201, 201, 201);
+        &.titleColor {
+          // font-weight: 350;
+          color: rgb(23, 103, 207);
+        }
       }
     }
 
     .navBorder {
       position: absolute;
-      top: 20%;
       left: 55%;
-      width: 2rem;
+      width: 0rem;
       height: 0.7rem;
-      opacity: 1;
-      background-color: rgb(53, 134, 241);
+      // opacity: 0;
+      background-color: rgb(0, 59, 136);
       border-radius: 30px;
       transition: all .7s;
+    }
 
-      &:hover {
-        width: 16rem;
-        left: 18%;
-        opacity: 1;
-        background-color: rgb(20, 93, 187);
-
-      }
+    .BorderAnimation {
+      width: 16rem;
+      left: 18%;
+      opacity: 1;
+      background-color: rgb(20, 93, 187);
     }
   }
 }
