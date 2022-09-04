@@ -5,31 +5,34 @@ export function useScroll() {
 
   const scrollbarRef = ref<InstanceType<typeof ElScrollbar>>() // 滚动组件
   const mainRef = ref() // 最外层包裹滚动对象的盒子
-  const isBounce = ref(true)
+  const isBounce = ref(true) // 是否显示或隐藏底部引导
   const currtent = ref(0) // 当前显示的盒子
+  const isCurrtent = ref(true) // 是否触发Currtent改变
 
   // 触发滚动事件
   function onScroll(scroll: { scrollLeft: number, scrollTop: number }) {
     // 是否显示或隐藏底部引导
     scroll.scrollTop > 0 ? isBounce.value = false : isBounce.value = true
 
-    // 鼠标滚动，指到对应的导航
-    let height: number = mainRef.value!.children[0].clientHeight / 1.1
-    // console.log(height);
-    if (0 < scroll.scrollTop && scroll.scrollTop < height) {
-      currtent.value = 0
-    }
-    if (height < scroll.scrollTop && scroll.scrollTop < 2 * height) {
-      currtent.value = 1
-    }
-    if (2 * height < scroll.scrollTop && scroll.scrollTop < 3 * height) {
-      currtent.value = 2
-    }
-    if (3 * height < scroll.scrollTop && scroll.scrollTop < 4 * height) {
-      currtent.value = 3
-    }
-    if (scroll.scrollTop > 4 * height && scroll.scrollTop < 5 * height) {
-      currtent.value = 4
+    // 鼠标滚动才触发
+    if (isCurrtent.value) {
+      // 鼠标滚动，指到对应的导航
+      let height: number = mainRef.value!.children[0].clientHeight / 1.1
+      if (0 < scroll.scrollTop && scroll.scrollTop < height) {
+        currtent.value = 0
+      }
+      if (height < scroll.scrollTop && scroll.scrollTop < 2 * height) {
+        currtent.value = 1
+      }
+      if (2 * height < scroll.scrollTop && scroll.scrollTop < 3 * height) {
+        currtent.value = 2
+      }
+      if (3 * height < scroll.scrollTop && scroll.scrollTop < 4 * height) {
+        currtent.value = 3
+      }
+      if (scroll.scrollTop > 4 * height && scroll.scrollTop < 5 * height) {
+        currtent.value = 4
+      }
     }
   }
   /**
@@ -82,6 +85,7 @@ export function useScroll() {
     currtent,
     onScroll,
     btnClick,
-    moveSlow
+    moveSlow,
+    isCurrtent
   }
 }

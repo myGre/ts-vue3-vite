@@ -1,4 +1,5 @@
 .setction {
+  justify-content: space-between;
   &:nth-child(1) {
     background: url("@/assets/images/bg.jpg") no-repeat;
     background-size: 100%;
@@ -22,12 +23,14 @@
   }
 
   &__right {
+    position: absolute;
+    height: 100vh;
     width: 50%;
-    float: left;
   }
 
   &__left {
+    position: absolute;
+    // height: 100vh;
     width: 50%;
-    float: left;
   }
 }

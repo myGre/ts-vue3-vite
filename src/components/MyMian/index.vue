@@ -1,6 +1,6 @@
 <template>
   <el-scrollbar ref="scrollbarRef" height="100vh" @scroll="onScroll" class="content_main">
-    <main ref="mainRef">
+    <main ref="mainRef" @mousewheel="onMousewheel">
       <!-- home首页 -->
       <MyHome></MyHome>
       <!-- 资料卡 -->
@@ -50,11 +50,13 @@ const props = defineProps({
 const emit = defineEmits(['getCurrtent', 'getIsNavClick'])
 
 // hooks
-const { onScroll, currtent, isBounce, mainRef, scrollbarRef, moveSlow, btnClick } = useScroll()
+const { onScroll, currtent, isBounce, mainRef, scrollbarRef, moveSlow, btnClick, isCurrtent } = useScroll()
 
 // 监听导航变化
 watch(() => props.navItem, (newValue, oldValue) => {
   if (!props.isNavClick) return
+  isCurrtent.value = false
+  currtent.value = newValue
   // 当前元素的高
   scrollObj.newHeight = mainRef.value!.children[oldValue].clientHeight
   // 目标元素的高
@@ -72,16 +74,25 @@ watch(() => props.navItem, (newValue, oldValue) => {
 
   // step不能为负
   if (step < 0) step = -step
-  moveSlow(scrollObj.oldTop, scrollObj.newTop, (step))
+  moveSlow(scrollObj.oldTop, scrollObj.newTop, step)
 
 })
 // 监听当前页面
 watch(currtent, (newValue, oldValue) => {
-  console.log(currtent);
-  emit('getIsNavClick', false)
-  emit('getCurrtent', newValue)
+  // 判断是否开启页面滚动
+  if(isCurrtent.value) {
+    emit('getIsNavClick', false);
+    emit('getCurrtent', newValue);
+  }
+  if (newValue == 0) {
+    
+  }
 })
 
+// 鼠标滚动事件
+function onMousewheel() {
+  isCurrtent.value = true
+}
 </script>
 
 <style lang="scss" scoped>
