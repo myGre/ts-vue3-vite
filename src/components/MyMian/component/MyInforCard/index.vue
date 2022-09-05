@@ -9,7 +9,7 @@
           <div class="poster">
             <img :src="item.src" alt="" />
           </div>
-          <h3 class="title">{{  item.title  }}</h3>
+          <h3 class="title">{{ item.title }}</h3>
           <!-- <div class="desc">
         </div> -->
         </div>
@@ -25,13 +25,14 @@
           <div class="detail_text"
             :style="isShow ? `left:${detail_textLeft}%; opacity: ${detail_opacity}; ${detail_transitionTrue}` : `left:${detail_textLeft}%; opacity: ${detail_opacity}; ${detail_transitionFalse}`">
             <div class="cancel" @click.stop="cancel">X</div>
-            <h3>{{  contentArr[itemIndex].title  }}</h3>
+            <h3>{{ contentArr[itemIndex].title }}</h3>
             <p class="desc">
-              {{  contentArr[itemIndex].desc  }}
+              {{ contentArr[itemIndex].desc }}
             </p>
           </div>
         </div>
       </div>
+      <my-cart></my-cart>
     </div>
   </section>
 </template>
@@ -39,6 +40,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
 import { contentArr } from '@/api/moke/index';
+import MyCart from '@/components/component/MyCart/index.vue'
 
 const isCardOrDetail = ref(false)
 const isShow = ref(true)

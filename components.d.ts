@@ -10,6 +10,7 @@ declare module '@vue/runtime-core' {
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
     MyAlbum: typeof import('./src/components/MyMian/component/MyAlbum/index.vue')['default']
     MyCard: typeof import('./src/components/myCard/index.vue')['default']
+    MyCart: typeof import('./src/components/component/MyCart/index.vue')['default']
     MyHome: typeof import('./src/components/MyMian/component/MyHome/index.vue')['default']
     MyInforCard: typeof import('./src/components/MyMian/component/MyInforCard/index.vue')['default']
     MyLnformation: typeof import('./src/components/MyMian/component/MyLnformation/index.vue')['default']
