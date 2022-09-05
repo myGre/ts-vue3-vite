@@ -72,29 +72,6 @@ defineExpose({
 </script>
 
 <style lang="scss">
-/* html {
-  box-sizing: border-box;
-  --bgColorMenu: #1d1d27;
-  --duration: .7s;
-}
-
-html *,
-html *::before,
-html *::after {
-  box-sizing: inherit;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  height: 100vh;
-  overflow: hidden;
-  align-items: center;
-  justify-content: center;
-  background-color: #ffb457;
-  -webkit-tap-highlight-color: transparent;
-  transition: background-color var(--duration);
-} */
 .content-nav {
   margin-top: 100px;
 

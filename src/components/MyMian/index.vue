@@ -21,11 +21,11 @@
 <script setup lang="ts">
 import { nextTick, onMounted, ref, watch, toRefs, reactive } from "vue";
 import { useScroll } from "@/hooks/useScroll";
-import MyHome from "@/components/MyMian/MyHome/index.vue";
-import MyInforCard from "@/components/MyMian/MyInforCard/index.vue";
-import MyLnformation from "@/components/MyMian/MyLnformation/index.vue";
-import MyAlbum from "@/components/MyMian/MyAlbum/index.vue";
-import MyStudent from "@/components/MyMian/MyStudent/index.vue"
+import MyHome from "@/components/MyMian/component/MyHome/index.vue";
+import MyInforCard from "@/components/MyMian/component/MyInforCard/index.vue";
+import MyLnformation from "@/components/MyMian/component/MyLnformation/index.vue";
+import MyAlbum from "@/components/MyMian/component/MyAlbum/index.vue";
+import MyStudent from "@/components/MyMian/component/MyStudent/index.vue";
 
 // 滚动数据
 let scrollObj = {
@@ -80,12 +80,21 @@ watch(() => props.navItem, (newValue, oldValue) => {
 // 监听当前页面
 watch(currtent, (newValue, oldValue) => {
   // 判断是否开启页面滚动
-  if(isCurrtent.value) {
+  if (isCurrtent.value) {
     emit('getIsNavClick', false);
     emit('getCurrtent', newValue);
   }
-  if (newValue == 0) {
-    
+  if (newValue == 1) {
+
+  }
+  if (newValue == 2) {
+
+  }
+  if (newValue == 3) {
+
+  }
+  if (newValue == 4) {
+
   }
 })
 

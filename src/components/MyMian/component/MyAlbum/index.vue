@@ -12,7 +12,7 @@
       <div class="albumNav">
         <ul class="ul">
           <li v-for="(item, index) in albumNavArr" :key="index" class="navTitle" @click="clickNavItem(index)">
-            <h3 :class="{ 'titleColor': currentItem == index }">{{ item }}</h3>
+            <h3 :class="{ 'titleColor': currentItem == index }">{{  item  }}</h3>
             <div class="navBorder" :class="{ 'BorderAnimation': currentItem == index }"></div>
           </li>
         </ul>
@@ -146,14 +146,6 @@ onMounted(() => {
     left: 60%;
     transform: translate(-60%, -50%);
     z-index: 30;
-
-    // .ul {
-    //   position: absolute;
-    //   top: 0;
-    //   left: 0;
-    //   display: flex;
-    //   flex-direction: column;
-    //   width: 100%;
 
     .navTitle {
       h3 {

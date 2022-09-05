@@ -8,15 +8,18 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     ElScrollbar: typeof import('element-plus/es')['ElScrollbar']
-    MyAlbum: typeof import('./src/components/MyMian/MyAlbum/index.vue')['default']
+    MyAlbum: typeof import('./src/components/MyMian/component/MyAlbum/index.vue')['default']
     MyCard: typeof import('./src/components/myCard/index.vue')['default']
-    MyHome: typeof import('./src/components/MyMian/MyHome/index.vue')['default']
-    MyInforCard: typeof import('./src/components/MyMian/MyInforCard/index.vue')['default']
-    MyLnformation: typeof import('./src/components/MyMian/MyLnformation/index.vue')['default']
+    MyHome: typeof import('./src/components/MyMian/component/MyHome/index.vue')['default']
+    MyInforCard: typeof import('./src/components/MyMian/component/MyInforCard/index.vue')['default']
+    MyLnformation: typeof import('./src/components/MyMian/component/MyLnformation/index.vue')['default']
+    MyMeteor: typeof import('./src/components/component/MyMeteor/index.vue')['default']
     MyMian: typeof import('./src/components/MyMian/index.vue')['default']
     MyNav: typeof import('./src/components/myNav.vue')['default']
+    MyRain: typeof import('./src/components/component/MyRain/index.vue')['default']
     MySnow: typeof import('./src/components/mySnow.vue')['default']
-    MyStudent: typeof import('./src/components/MyMian/MyStudent/index.vue')['default']
+    MyStar: typeof import('./src/components/component/MyStar/index.vue')['default']
+    MyStudent: typeof import('./src/components/MyMian/component/MyStudent/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

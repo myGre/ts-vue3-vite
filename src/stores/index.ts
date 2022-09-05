@@ -1,7 +1,7 @@
 import { createPinia, defineStore } from "pinia";
 import { GlobalState } from "./interface";
 import piniaPluginPersistedstate from "pinia-plugin-persistedstate"
-import piniaPersistConfig from "../config/piniaPersist";
+import { piniaPersistConfig } from "../config/piniaPersist";
 
 export const GlobalStore = defineStore('global', {
   state: (): GlobalState => {

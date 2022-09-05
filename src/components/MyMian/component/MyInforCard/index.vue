@@ -1,6 +1,9 @@
 <template>
   <section class="setction" @click.stop="cancel">
     <div class="main_section">
+      <div class="titleH2">
+        <h2>资料卡</h2>
+      </div>
       <div class="movie_content" @click.stop ref="movieRef" :style="isShow ? `opacity: 1;` : `opacity: 0;`">
         <div class="movie" @click.stop="boxDetail($event, index)" v-for="(item, index) in contentArr" :key="index">
           <div class="poster">

@@ -1,4 +1,4 @@
-import piniaPersistConfig from "@/config/piniaPersist";
+import { piniaPersistConfig, sessionPiniaPersistConfig } from "@/config/piniaPersist";
 import { defineStore } from "pinia"
 
 export const activeSetctionStore = defineStore('activeSetction', {
@@ -8,7 +8,6 @@ export const activeSetctionStore = defineStore('activeSetction', {
       activeAlbum: false,
       activeLnformation: false,
       activeStudent: false,
-
     }
   },
   actions: {
@@ -30,5 +29,5 @@ export const activeSetctionStore = defineStore('activeSetction', {
     },
   },
   getters: {},
-  persist: piniaPersistConfig("activeSetction")
+  // persist: sessionPiniaPersistConfig("activeSetction")
 })
