@@ -17,13 +17,36 @@
     font-size: 2rem;
   }
 
-  &__right {
-    width: 50%;
-    float: left;
-  }
+  .main_section {
+    width: 100%;
+    height: 90%;
+    background-color: rgb(167, 167, 167, .1);
+    position: relative;
 
-  &__left {
-    width: 50%;
-    float: left;
+    .setction__left {
+      width: 50%;
+      height: 100vh;
+      float: left;
+    }
+
+    .setction__right {
+      box-sizing: border-box;
+      padding: 3rem;
+      width: 50%;
+      height: 100vh;
+      float: left;
+
+      article {
+        width: 100%;
+        height: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        p {
+          text-indent: 2rem;
+        }
+      }
+    }
   }
 }

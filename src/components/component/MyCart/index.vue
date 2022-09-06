@@ -2,20 +2,30 @@
 import { ref } from 'vue';
 import HelloWorld from './components/HelloWorld.vue';
 
-const isActive = ref(false)
-function onMove() {
-  isActive.value = true;
-}
-function onLeave() {
-  isActive.value = false;
-}
+// const isActive = ref(false)
+// function onMove() {
+//   isActive.value = true;
+// }
+// function onLeave() {
+//   isActive.value = false;
+// }
+const props = defineProps({
+  isActive: {
+    type: Boolean,
+    default: false
+  },
+  opacity: {
+    type: Number,
+    default: 0
+  }
+})
 </script>
   
   <template>
-  <div class="canvas_box">
+  <div class="canvas_box" :style="`opacity: ${opacity}`">
     <!-- Added SVG for base images  -->
     <div class="canvas">
-      <div class="car-obj" @mousedown="onMove" :class="{'on': isActive}" id="car-object">
+      <div class="car-obj" :class="{ 'on': isActive }" id="car-object">
 
         <svg width="87.5" height="50" viewBox="0 0 46.302083 26.458337" version="1.1" id="svg5">
 
@@ -116,65 +126,6 @@ function onLeave() {
 </template>
   
   <style lang="scss" scoped>
-  .canvas_box {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-  }
-  
-  /* Car  */
-  .car-obj {
-    position: absolute;
-    top: calc(50% + 5px);
-    left: 10%;
-    transform: translate(-50%, -50%) rotate(0deg);
-    transform-origin: 50px 0;
-    transition: all 2s ease;
-  
-    &.on {
-      transform: translate(1000%, -50%) rotate(0deg);
-    }
-  }
-  
-  /* Events  */
-  
-  .road-object {
-    width: 100%;
-    height: 3px;
-    background: rgba(0, 0, 0, 0.41);
-    position: absolute;
-    top: calc(50% + 52px);
-    left: 50%;
-    transform: translate(-50%, -50%);
-    box-shadow: 0px 8px 15px 1px #000000;
-  }
-  
-  .canvas {
-    // width: 40%;
-    height: 50px;
-    position: relative;
-    // z-index: 99;
-    /* overflow: hidden; */
-  }
-  
-  #tfront {
-    animation: frontwheelanim 1s ease infinite;
-  }
-  
-  #tback {
-    animation: backwheelanim 1s ease 0.2s infinite;
-  }
-  
-  @keyframes frontwheelanim {
-    80% {
-      transform: matrix(4.0764314, 0, 0, 4.0764314, -254.34846, -309.01206);
-    }
-  }
-  
-  @keyframes backwheelanim {
-    80% {
-      transform: matrix(4.0764314, 0, 0, 4.0764314, -278.31911, -308.68738);
-    }
-  }
+  @import './index.scss';
   </style>
   

@@ -1,31 +1,37 @@
 import { piniaPersistConfig, sessionPiniaPersistConfig } from "@/config/piniaPersist";
+import { fa } from "element-plus/es/locale";
 import { defineStore } from "pinia"
 
 export const activeSetctionStore = defineStore('activeSetction', {
   state: () => {
     return {
-      activeInfoCard: false,
-      activeAlbum: false,
-      activeLnformation: false,
-      activeStudent: false,
+      isActiveHome: false,
+      isActiveInfoCard: false,
+      isActiveAlbum: false,
+      isActiveLnformation: false,
+      isActiveStudent: false,
     }
   },
   actions: {
     // 资料卡样式过渡效果
+    setActiveHome(is: boolean) {
+      this.isActiveHome = is;
+    },
+    // 资料卡样式过渡效果
     setActiveInfoCard(is: boolean) {
-      this.activeInfoCard = is;
+      this.isActiveInfoCard = is;
     },
     // 相册样式过渡效果
     setActiveAlbum(is: boolean) {
-      this.activeAlbum = is;
+      this.isActiveAlbum = is;
     },
     // 个人信息样式过渡效果
     setActiveLnformation(is: boolean) {
-      this.activeLnformation = is;
+      this.isActiveLnformation = is;
     },
     // 学籍样式过渡效果
     setActiveStudent(is: boolean) {
-      this.activeStudent = is;
+      this.isActiveStudent = is;
     },
   },
   getters: {},

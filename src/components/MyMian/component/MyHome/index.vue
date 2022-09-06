@@ -5,7 +5,7 @@
     <!-- <MyMeteor :delay="0" :w="3" :h="200" :rotateDeg="-70"></MyMeteor>
     <MyMeteor :delay="2" :w="3" :h="200" :rotateDeg="-65"></MyMeteor>
     <MyMeteor :delay="4" :w="3" :h="200" :rotateDeg="-75"></MyMeteor> -->
-    <div class="setction__left" :class="{ 'activeSetction': isLeftClass }">
+    <div class="setction__left" :style="isActive ? `transform: translateY(0vh);` : ''">
       <article>
         <h1>Hws Dreagreatger</h1>
         <p>Let's start showing off some magic...</p>
@@ -16,22 +16,17 @@
 </template>
 
 <script setup lang="ts">
-import { computed, nextTick, onMounted, ref } from "vue";
+import { computed, nextTick, onDeactivated, onMounted, ref } from "vue";
 import { activeSetctionStore } from '@/stores/activeSetction/index';
-import MyRain from '@/components/component/MyRain/index.vue'
-import MyStar from "@/components/component/MyStar/index.vue";
-import MyMeteor from "@/components/component/MyMeteor/index.vue";
 
 
 // 使用pinia管理状态
-const activeSetction = activeSetctionStore()
-
-const isLeftClass = computed(() => {
-  return activeSetction.activeInfoCard
-})
-
+const store = activeSetctionStore()
+const isActive = computed(() => store.isActiveHome);
 onMounted(() => {
-  activeSetction.setActiveInfoCard(true);
+  nextTick(() => {
+    store.setActiveHome(true);
+  })
 })
 </script>
 
@@ -41,9 +36,5 @@ onMounted(() => {
 .setction__left {
   transform: translateY(100vh);
   transition: transform .7s ease;
-}
-
-.activeSetction {
-  transform: translateY(0vh);
 }
 </style>

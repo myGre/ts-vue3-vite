@@ -1,39 +1,13 @@
-<template>
-  <section class="setction flex">
-    <div class="setction__left">
-      <!-- 相册 -->
-      <div class="img_MaxBox" ref="img_MaxBoxRef">
-        <div class="imgBox" ref="imgBoxRef">
-          <img v-for="(item, index) in imgArr[currentItem]" :key="index" class="img" :src="item" alt=""
-            :style="`${imgOffsetAndWidthArr[index - 1]}}`">
-        </div>
-      </div>
-      <!-- 导航 -->
-      <div class="albumNav">
-        <ul class="ul">
-          <li v-for="(item, index) in albumNavArr" :key="index" class="navTitle" @click="clickNavItem(index)">
-            <h3 :class="{ 'titleColor': currentItem == index }">{{  item  }}</h3>
-            <div class="navBorder" :class="{ 'BorderAnimation': currentItem == index }"></div>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <!-- 介绍 -->
-    <div class="setction__right">
-      <article>
-        <h3>The weather started getting rough — the tiny ship was tossed.</h3>
-        <p>If not for the courage of the fearless crew the Minnow would be lost. the Minnow would be lost? The Brady
-          Bunch the Brady Bunch that's the way we all became the Brady Bunch.</p>
-      </article>
-    </div>
-  </section>
-</template>
-
 <script setup lang="ts">
 import { computed, onMounted, ref } from "vue";
-import useAlbum from "@/hooks/useAlbum"
+import useAlbum from "@/hooks/useAlbum";
+import { activeSetctionStore } from "@/stores/activeSetction";
+
+const store = activeSetctionStore();
+const isActive = computed(() => store.isActiveAlbum);
+
 // 导航信息
-const albumNavArr: Array<string> = ['生活', '风景', '个人', '夜晚']
+const albumNavArr: Array<string> = ['生活', '风景', '个人', '夜晚'];
 // 图片信息
 const imgArr: Array<any> = [
   {
@@ -61,8 +35,7 @@ const imgArr: Array<any> = [
   }
 ]
 // hooks
-const { img_MaxBoxRef, currentItem, imgBoxRef, getOffsetOrWidth, imgOffsetAndWidthArr } = useAlbum()
-
+const { img_MaxBoxRef, currentItem, imgBoxRef, getOffsetOrWidth, imgOffsetAndWidthArr } = useAlbum();
 
 // 导航下边框动画
 const BorderAnimation = computed(() => {
@@ -90,15 +63,60 @@ onMounted(() => {
 })
 </script>
 
+<template>
+  <section class="setction flex">
+    <div class="main_section">
+      <MyBorderBox title="相册" :isActive="isActive"></MyBorderBox>
+      <div class="setction__left">
+        <!-- 相册 -->
+        <div class="img_MaxBox" ref="img_MaxBoxRef">
+          <div class="imgBox" ref="imgBoxRef">
+            <img v-for="(item, index) in imgArr[currentItem]" :key="index" class="img" :src="item" alt=""
+              :style="`${imgOffsetAndWidthArr[index - 1]}}`">
+          </div>
+        </div>
+        <!-- 导航 -->
+        <div class="albumNav">
+          <ul class="ul">
+            <li v-for="(item, index) in albumNavArr" :key="index" class="navTitle" @click="clickNavItem(index)">
+              <h3 :class="{ 'titleColor': currentItem == index }">{{  item  }}</h3>
+              <div class="navBorder" :class="{ 'BorderAnimation': currentItem == index }"></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- 介绍 -->
+      <div class="setction__right">
+        <article>
+          <h3>The weather started getting rough — the tiny ship was tossed.</h3>
+          <p>If not for the courage of the fearless crew the Minnow would be lost. the Minnow would be lost? The Brady
+            Bunch the Brady Bunch that's the way we all became the Brady Bunch.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+</template>
+
 <style lang="scss" scoped>
 @import "./index.scss";
 
+.main_section {
+  width: 100%;
+  height: 90%;
+  background-color: rgb(167, 167, 167, .1);
+  position: relative;
+}
+
 .setction__left {
   background-color: rgb(153, 153, 153, .5);
-  width: 60%;
+  width: 50%;
   height: 80%;
+  box-sizing: border-box;
+  margin-left: 4rem;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 
-  // position: absolute;
   .img_MaxBox {
     width: 100%;
     height: 100%;
@@ -143,8 +161,8 @@ onMounted(() => {
   .albumNav {
     position: absolute;
     top: 50%;
-    left: 60%;
-    transform: translate(-60%, -50%);
+    right: -15%;
+    transform: translateY(-50%);
     z-index: 30;
 
     .navTitle {
@@ -181,5 +199,12 @@ onMounted(() => {
       background-color: rgb(20, 93, 187);
     }
   }
+}
+
+.setction__right {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
 </style>

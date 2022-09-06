@@ -19,13 +19,16 @@
 </template>
 
 <script setup lang="ts">
-import { nextTick, onMounted, ref, watch, toRefs, reactive } from "vue";
+import { onMounted, ref, watch, reactive, computed } from "vue";
 import { useScroll } from "@/hooks/useScroll";
-import MyHome from "@/components/MyMian/component/MyHome/index.vue";
-import MyInforCard from "@/components/MyMian/component/MyInforCard/index.vue";
-import MyLnformation from "@/components/MyMian/component/MyLnformation/index.vue";
-import MyAlbum from "@/components/MyMian/component/MyAlbum/index.vue";
-import MyStudent from "@/components/MyMian/component/MyStudent/index.vue";
+import { activeSetctionStore } from '@/stores/activeSetction/index'
+
+// pinia
+const store = activeSetctionStore()
+const isActiveInfoCard = computed(() => store); // 控制资料卡过渡效果
+const isActiveAlbum = computed(() => store.isActiveAlbum); // 控制相册过渡效果
+const isActiveLnformation = computed(() => store.isActiveLnformation); // 控制个人信息过渡效果
+const isActiveStudent = computed(() => store.isActiveStudent); // 控制学籍过渡效果
 
 // 滚动数据
 let scrollObj = {
@@ -84,17 +87,18 @@ watch(currtent, (newValue, oldValue) => {
     emit('getIsNavClick', false);
     emit('getCurrtent', newValue);
   }
-  if (newValue == 1) {
 
+  if (newValue == 1) {
+    store.setActiveInfoCard(true);
   }
   if (newValue == 2) {
-
+    store.setActiveLnformation(true);
   }
   if (newValue == 3) {
-
+    store.setActiveAlbum(true);
   }
   if (newValue == 4) {
-
+    store.setActiveStudent(true);
   }
 })
 

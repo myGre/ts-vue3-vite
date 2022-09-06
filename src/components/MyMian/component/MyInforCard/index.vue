@@ -1,15 +1,13 @@
 <template>
   <section class="setction" @click.stop="cancel">
     <div class="main_section">
-      <div class="titleH2">
-        <h2>资料卡</h2>
-      </div>
+      <MyBorderBox :isActive="isActive"></MyBorderBox>
       <div class="movie_content" @click.stop ref="movieRef" :style="isShow ? `opacity: 1;` : `opacity: 0;`">
         <div class="movie" @click.stop="boxDetail($event, index)" v-for="(item, index) in contentArr" :key="index">
           <div class="poster">
             <img :src="item.src" alt="" />
           </div>
-          <h3 class="title">{{ item.title }}</h3>
+          <h3 class="title">{{  item.title  }}</h3>
           <!-- <div class="desc">
         </div> -->
         </div>
@@ -25,14 +23,13 @@
           <div class="detail_text"
             :style="isShow ? `left:${detail_textLeft}%; opacity: ${detail_opacity}; ${detail_transitionTrue}` : `left:${detail_textLeft}%; opacity: ${detail_opacity}; ${detail_transitionFalse}`">
             <div class="cancel" @click.stop="cancel">X</div>
-            <h3>{{ contentArr[itemIndex].title }}</h3>
+            <h3>{{  contentArr[itemIndex].title  }}</h3>
             <p class="desc">
-              {{ contentArr[itemIndex].desc }}
+              {{  contentArr[itemIndex].desc  }}
             </p>
           </div>
         </div>
       </div>
-      <my-cart></my-cart>
     </div>
   </section>
 </template>
@@ -40,7 +37,11 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue';
 import { contentArr } from '@/api/moke/index';
-import MyCart from '@/components/component/MyCart/index.vue'
+import { activeSetctionStore } from '@/stores/activeSetction';
+
+const store = activeSetctionStore();
+
+const isActive = computed(() => store.isActiveInfoCard);
 
 const isCardOrDetail = ref(false)
 const isShow = ref(true)
@@ -56,7 +57,7 @@ const detail_opacity = ref(0)
 
 // 显示或隐藏详情弹窗
 const detail_show = computed(() => {
-  return isCardOrDetail.value ? `display: flex` : ''
+  return isCardOrDetail.value ? `display: flex` : '';
 })
 
 // 文本框过渡效果
