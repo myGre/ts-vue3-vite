@@ -1,21 +1,15 @@
 <template>
-  <!-- <div class="bg"></div> -->
   <svg stroke="#fff" @click="onclick" stroke-linecap="round">
     <g class="stage" ref="stageRef">
       <rect width="100%" height="100%" fill="rgba(0,0,0,0)" stroke="none" />
     </g>
-    <!-- <g class="toggle" @click="onclick" ref="toggleRef" style="cursor:pointer;user-select:none">
-      <path d="M100,20 118,20" stroke-width="25" />
-      <path class="knob" d="M100,20 100,20" stroke-width="20" stroke="#000" />
-      <text class="txt1" fill="#fff" x="11" y="26">Manual</text>
-      <text class="txt2" fill="#fff" x="144" y="26" opacity="0.3">Auto</text>
-    </g> -->
   </svg>
 </template>
 
 <script setup lang="ts" >
 import { onMounted, reactive, ref } from "vue";
 import { gsap } from "gsap";
+import { createInterface } from "readline";
 
 const auto = ref(false);
 const m = reactive({ x: 0, y: 0 });
@@ -27,13 +21,6 @@ window.onpointerdown = window.onpointermove = (e: any) => {
   m.y = Math.round(e.clientY);
 
 }
-// stageRef.value.onpointerup = (e: any) => {
-// gsap.killTweensOf(autoPlay)
-// gsap.killTweensOf(fire)
-// auto.value = true
-// toggleAuto()
-// fire(m)
-// }
 function fire(m: { x: number, y: number }) {
 
   const firework = document.createElementNS('http://www.w3.org/2000/svg', 'g'),
@@ -71,7 +58,7 @@ function onclick() {
   gsap.killTweensOf(autoPlay)
   gsap.killTweensOf(fire)
   // auto.value = true
-  toggleAuto()
+  // toggleAuto()
   fire(m)
 }
 
@@ -96,8 +83,14 @@ function autoPlay() {
 }
 
 onMounted(() => {
-  console.log(stageRef.value.onpointerup);
-  toggleAuto();
+  let i = 0;
+  const timer = setInterval(() => {
+    toggleAuto();
+    i++;
+    if (i > 4) {
+      clearInterval(timer);
+    }
+  }, 5000)
 })
 </script>
 
@@ -108,6 +101,7 @@ svg {
   overflow: hidden;
   position: absolute;
   top: 0;
+  z-index: 9;
   font-family: 'Roboto', sans-serif;
   font-size: 19px;
 }

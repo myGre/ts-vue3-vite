@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue-demi"
+import { ref } from "vue"
 
 const meteorBoxRef = ref()
 const props = defineProps({
