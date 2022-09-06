@@ -13,10 +13,15 @@
   left: 10%;
   transform: translate(-50%, -50%) rotate(0deg);
   transform-origin: 50px 0;
-  transition: all 2s ease 2s;
+  transition: all 4s ease-in-out 2s;
 
   &.on {
-    transform: translate(1000%, -50%) rotate(0deg);
+    transform: translate(70vw, -50%) rotateY(0deg);
+  }
+
+  &.activeCar {
+    transition: none;
+    animation: activeCar 8s ease-in-out;
   }
 }
 
@@ -58,5 +63,24 @@
 @keyframes backwheelanim {
   80% {
     transform: matrix(4.0764314, 0, 0, 4.0764314, -278.31911, -308.68738);
+  }
+}
+
+@keyframes activeCar {
+  0% {
+    transform: translate(70vw, -50%) rotateY(180deg);
+  }
+
+  40% {
+    transform: translate(-50%, -50%) rotateY(180deg);
+  }
+
+  60% {
+    transform: translate(-50%, -50%) rotateY(0deg);
+  }
+
+  100% {
+    transform: translate(70vw, -50%) rotateY(0deg);
+
   }
 }

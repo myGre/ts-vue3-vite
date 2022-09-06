@@ -1,9 +1,9 @@
 <template>
   <section class="setction flex">
     <!-- <MyRain :rainNumber="50" :rotateDeg="-45" :w="2" :h="20"></MyRain> -->
-    <!-- <MyStar :starNumber="20" :w="4" :h="4"></MyStar> -->
-    <!-- <MyMeteor :delay="0" :w="3" :h="200" :rotateDeg="-70"></MyMeteor>
-    <MyMeteor :delay="2" :w="3" :h="200" :rotateDeg="-65"></MyMeteor>
+    <MyStar :starNumber="10" :w="4" :h="4"></MyStar>
+    <MyMeteor :delay="0" :w="3" :h="200" :rotateDeg="-80"></MyMeteor>
+    <!-- <MyMeteor :delay="2" :w="3" :h="200" :rotateDeg="-65"></MyMeteor>
     <MyMeteor :delay="4" :w="3" :h="200" :rotateDeg="-75"></MyMeteor> -->
     <div class="setction__left" :style="isActive ? `transform: translateY(0vh);` : ''">
       <article>

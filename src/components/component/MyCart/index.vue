@@ -2,7 +2,7 @@
 import { ref } from 'vue';
 import HelloWorld from './components/HelloWorld.vue';
 
-// const isActive = ref(false)
+const isActiveCar = ref(false)
 // function onMove() {
 //   isActive.value = true;
 // }
@@ -19,13 +19,17 @@ const props = defineProps({
     default: 0
   }
 })
+
+function onClick() {
+  isActiveCar.value = true;
+}
 </script>
   
   <template>
   <div class="canvas_box" :style="`opacity: ${opacity}`">
     <!-- Added SVG for base images  -->
     <div class="canvas">
-      <div class="car-obj" :class="{ 'on': isActive }" id="car-object">
+      <div class="car-obj" @click="onClick" :class="{ 'on': isActive, 'activeCar': isActiveCar }" id="car-object">
 
         <svg width="87.5" height="50" viewBox="0 0 46.302083 26.458337" version="1.1" id="svg5">
 
