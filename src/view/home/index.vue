@@ -26,7 +26,6 @@
 
 <script setup lang="ts">
 import { computed, nextTick, onMounted, ref, watch } from "vue";
-import MyMian from "@/components/MyMian/index.vue"
 
 
 const navObj = ref(["home", "资料卡", "个人信息", "相册", "学籍"])
@@ -66,12 +65,6 @@ function navClickItem(index: number) {
   isNavClick.value = true
   navItem.value = index
 }
-
-onMounted(() => {
-  // console.log(myMianRef.value);
-
-})
-
 </script>
 
 <style lang="scss" scoped>

@@ -48,9 +48,10 @@ onMounted(() => {
   width: 100vw;
   height: 100vh;
   position: relative;
-  background: radial-gradient(at 0% 100%,
-      rgba(9, 37, 61, 1) 20%,
-      rgba(9, 31, 55, 1) 70%);
+  // background: radial-gradient(at 0% 100%,
+  //     rgba(9, 37, 61, 1) 20%,
+  //     rgba(9, 31, 55, 1) 70%);
+  background: linear-gradient(165deg, black 30%, darkblue 200%);
 
   .star-item {
     // margin: 50px 0;
