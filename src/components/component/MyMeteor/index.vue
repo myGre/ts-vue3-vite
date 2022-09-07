@@ -1,6 +1,6 @@
 <template>
   <div ref="meteorBoxRef" class="meteorBox">
-    <div class="meteor" :style="`transform:rotate(${rotateDeg}deg)`">
+    <div class="meteor" :style="`transform:rotate(${props.rotateDeg}deg)`">
       <div class="line" :style="`animation-delay:${delay}s;width:${w}px;height:${h}px;`"></div>
     </div>
   </div>

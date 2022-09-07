@@ -79,7 +79,7 @@ onMounted(() => {
         <div class="albumNav">
           <ul class="ul">
             <li v-for="(item, index) in albumNavArr" :key="index" class="navTitle" @click="clickNavItem(index)">
-              <h3 :class="{ 'titleColor': currentItem == index }">{{  item  }}</h3>
+              <h3 :class="{ 'titleColor': currentItem == index }">{{ item }}</h3>
               <div class="navBorder" :class="{ 'BorderAnimation': currentItem == index }"></div>
             </li>
           </ul>
@@ -99,112 +99,4 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 @import "./index.scss";
-
-.main_section {
-  width: 100%;
-  height: 90%;
-  background-color: rgb(167, 167, 167, .1);
-  position: relative;
-}
-
-.setction__left {
-  background-color: rgb(153, 153, 153, .5);
-  width: 50%;
-  height: 80%;
-  box-sizing: border-box;
-  margin-left: 4rem;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-
-  .img_MaxBox {
-    width: 100%;
-    height: 100%;
-
-    .imgBox {
-      box-sizing: border-box;
-      position: relative;
-      width: 30%;
-      height: 30%;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-
-      .img {
-        width: 0;
-        position: absolute;
-        transition: all 1s;
-
-        &:nth-child(1) {
-          left: 50%;
-          top: 50%;
-        }
-
-        &:nth-child(2) {
-          right: 50%;
-          top: 50%;
-        }
-
-        &:nth-child(3) {
-          left: 50%;
-          bottom: 50%;
-        }
-
-        &:nth-child(4) {
-          right: 50%;
-          bottom: 50%;
-        }
-      }
-    }
-  }
-
-  .albumNav {
-    position: absolute;
-    top: 50%;
-    right: -15%;
-    transform: translateY(-50%);
-    z-index: 30;
-
-    .navTitle {
-      h3 {
-        cursor: pointer;
-        font-size: 7.1rem;
-        transition: all .7s;
-        line-height: 11rem;
-        margin: 0;
-        color: rgb(201, 201, 201, .5);
-
-        &.titleColor {
-          // font-weight: 350;
-          color: rgb(23, 103, 207);
-        }
-      }
-    }
-
-    .navBorder {
-      position: absolute;
-      left: 55%;
-      width: 0rem;
-      height: 0.7rem;
-      // opacity: 0;
-      background-color: rgb(0, 59, 136);
-      border-radius: 30px;
-      transition: all .7s;
-    }
-
-    .BorderAnimation {
-      width: 16rem;
-      left: 18%;
-      opacity: 1;
-      background-color: rgb(20, 93, 187);
-    }
-  }
-}
-
-.setction__right {
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-}
 </style>
