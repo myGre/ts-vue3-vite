@@ -1,13 +1,14 @@
 <template>
   <!-- 详情 -->
   <div class="detail_section" :style="`${props.detail_show};`">
-    <div class="movie" :style="`width: ${elWidth}%; top:${offsetTop}px; left:${offsetleft}px;`">
-      <div class="poster" :style="`width: ${posterWidht}%;`">
-        <img :src="drawerData.image" alt="" :style="`width: ${imgWidht}%;`" />
+    <div class="movie"
+      :style="`width: ${detailStyle.elWidth}%; top:${detailStyle.offsetTop}px; left:${detailStyle.offsetleft}px;`">
+      <div class="poster" :style="`width: ${detailStyle.posterWidht}%;`">
+        <img :src="drawerData.image" alt="" :style="`width: ${detailStyle.imgWidht}%;`" />
       </div>
       <h3 class="title"></h3>
       <div class="detail_text"
-        :style="isShow ? `left:${detail_textLeft}%; opacity: ${detail_opacity}; ${detail_transitionTrue}` : `left:${detail_textLeft}%; opacity: ${detail_opacity}; ${detail_transitionFalse}`">
+        :style="isShow ? `left:${detailStyle.detail_textLeft}%; opacity: ${detailStyle.detail_opacity}; ${detail_transitionTrue}` : `left:${detailStyle.detail_textLeft}%; opacity: ${detailStyle.detail_opacity}; ${detail_transitionFalse}`">
         <div class="cancel" @click.stop="">X</div>
         <h3>{{ drawerData.title }}</h3>
         <p class="desc">
@@ -19,60 +20,55 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { onMounted, ref, watch, computed } from "vue";
 import { contentArr } from '@/api/moke/index';
 import { User } from '@/api/interface/index';
 
 interface DrawerProps {
   rowData?: User.ResUserImgs;
 }
+interface DetailStyle {
+  offsetleft?: number,
+  offsetTop?: number,
+  elWidth?: number,
+  posterWidht?: number,
+  imgWidht?: number,
+  detail_textLeft?: number,
+  detail_opacity?: number,
+}
 
 const drawerData = ref<DrawerProps>({});
 // 接收父组件传过来的参数
 const acceptParams = (params: DrawerProps): void => {
+
   drawerData.value = params;
 };
-
+const detailStyle = ref<DetailStyle>({
+});
+const style = (params: DetailStyle): void => {
+  detailStyle.value = params;
+};
 const props = defineProps({
   isShow: {
     type: Boolean,
   },
-  offsetleft: {
-    type: Number,
-  },
-  offsetTop: {
-    type: Number,
-  },
-  elWidth: {
-    type: Number,
-  },
-  posterWidht: {
-    type: Number,
-  },
-  imgWidht: {
-    type: Number,
-  },
-  detail_textLeft: {
-    type: Number,
-  },
-  detail_opacity: {
-    type: Number,
-  },
   detail_show: {
     type: String
   },
-  detail_transitionTrue: {
-    type: String
-  },
-  detail_transitionFalse: {
-    type: String
-  }
 });
 
-defineExpose({
-  acceptParams
+// 文本框过渡效果
+const detail_transitionTrue = computed(() => {
+  return `transition: all .1s cubic-bezier(.67, .13, .1, .81);`
+})
+const detail_transitionFalse = computed(() => {
+  return `transition: all .7s cubic-bezier(.67, .13, .1, .81) .8s;`
 })
 
+defineExpose({
+  acceptParams,
+  style
+})
 </script>
 
 <style lang="scss" scoped>
