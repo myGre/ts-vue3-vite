@@ -16,6 +16,7 @@ declare module '@vue/runtime-core' {
     MyAlbum: typeof import('./src/components/MyMian/component/MyAlbum/index.vue')['default']
     MyBorderBox: typeof import('./src/components/component/MyBorderBox/index.vue')['default']
     MyCart: typeof import('./src/components/component/MyCart/index.vue')['default']
+    MyDetail: typeof import('./src/components/MyMian/component/MyInforCard/MyDetail/index.vue')['default']
     MyFireworks: typeof import('./src/components/component/MyFireworks/index.vue')['default']
     MyHome: typeof import('./src/components/MyMian/component/MyHome/index.vue')['default']
     MyInforCard: typeof import('./src/components/MyMian/component/MyInforCard/index.vue')['default']

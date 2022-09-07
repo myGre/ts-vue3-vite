@@ -1,6 +1,6 @@
 // * 请求响应参数(不包含data)
 export interface Result {
-  code: string;
+  code: number;
   msg: string;
 }
 
@@ -9,7 +9,6 @@ export interface Result {
 export interface ResultData<T = any> extends Result {
   data?: T;
 }
-
 
 // * 登录模块
 export namespace Login {
@@ -22,5 +21,16 @@ export namespace Login {
   }
   export interface ResAuthButtons {
     [key: string]: any;
+  }
+}
+
+// * user模块
+export namespace User {
+  export interface ResUserImgs {
+    id: string;
+    image: string;
+    title: string;
+    csentence: string;
+    cparagraph: string;
   }
 }
