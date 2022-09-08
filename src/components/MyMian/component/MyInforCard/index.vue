@@ -1,8 +1,8 @@
 <template>
   <section class="setction" @click.stop="cancel">
-    <div class="main_section">
+    <div class="main_section" @click.stop>
       <MyBorderBox :isActive="isActive"></MyBorderBox>
-      <div class="movie_content" @click.stop ref="movieRef" :style="isShow ? `opacity: 1` : `opacity: 0`">
+      <div class="movie_content" ref="movieRef" :style="isShow ? `opacity: 1` : `opacity: 0`">
         <div class="movie" @click.stop="boxDetail($event, index)" v-for="(item, index) in state.inforCardList"
           :key="index">
           <div class="poster">
@@ -12,7 +12,8 @@
         </div>
       </div>
       <!-- 详情 -->
-      <MyDetail ref="detailRef" :isShow="isShow" :detail_show="detail_show" :detailStyle="detailStyle"></MyDetail>
+      <MyDetail ref="detailRef" :isShow="isShow" :detail_show="detail_show" :detailStyle="detailStyle" @cancel="cancel">
+      </MyDetail>
     </div>
   </section>
 </template>
@@ -22,9 +23,10 @@ import { computed, onMounted, ref, nextTick, reactive } from 'vue';
 import { User } from '@/api/interface/index';
 import { activeSetctionStore } from '@/stores/activeSetction';
 import { getImage } from '@/api/modules/user';
+import { DetailStyle } from './interface';
 import { useInforCard } from '@/hooks/useinforCard';
 
-const { state, getImageList } = useInforCard(getImage)
+const { state, getImageList } = useInforCard(getImage);
 const store = activeSetctionStore();
 
 const isActive = computed(() => store.isActiveInfoCard);
@@ -34,18 +36,8 @@ const movieRef = ref(); // 每个小盒子
 const isCardOrDetail = ref(false);
 const isShow = ref(true); // 是否显示详情页
 
-interface detailStyle {
-  offsetleft?: number, // 详情页位移目标值
-  offsetTop?: number, // 详情页目标top值
-  elWidth?: number, // 详情页内盒子宽度
-  posterWidht?: number, // 图片盒子宽度
-  imgWidht?: number, // 图片宽度
-  detail_textLeft?: number, // 文本框left值
-  detail_opacity?: number, // 文本框透明度值
-}
-
 // 详情页样式
-const detailStyle = reactive<detailStyle>({
+const detailStyle = reactive<DetailStyle>({
   elWidth: 60,
   posterWidht: 35,
   imgWidht: 80,
@@ -69,7 +61,7 @@ function boxDetail(el: any, index: number) {
   getDetailStyle(detailStyle);
   setTimeout(() => {
     detailStyle.offsetleft = -30;
-    detailStyle.offsetTop = 0;
+    detailStyle.offsetTop = -30;
     detailStyle.elWidth = 100;
     detailStyle.detail_textLeft = 30;
     detailStyle.detail_opacity = 1;
@@ -83,7 +75,7 @@ function boxDetail(el: any, index: number) {
 // 关闭详情弹窗
 function cancel() {
   detailStyle.offsetleft = -30;
-  detailStyle.offsetTop = 0;
+  detailStyle.offsetTop = -30;
   detailStyle.elWidth = 100;
   detailStyle.posterWidht = 35;
   detailStyle.imgWidht = 80;
@@ -109,10 +101,9 @@ interface detailExpose {
   style: (params: any) => void;
 }
 const detailRef = ref<detailExpose>();
-function getDetailStyle(style: Partial<detailStyle>) {
+// 获取列表信息
+function getDetailStyle(style: Partial<DetailStyle>) {
   let detailStyle = { ...style };
-  console.log(detailStyle);
-
   detailRef.value!.style(detailStyle);
 }
 // detailRef数据处理
@@ -123,7 +114,6 @@ function detailObj(detail: Partial<User.ResUserImgs>) {
 
 onMounted(() => {
   nextTick(() => {
-    // getimgs();
     getImageList()
   })
 })

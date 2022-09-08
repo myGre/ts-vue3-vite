@@ -1,7 +1,7 @@
 <template>
   <svg stroke="#fff" @click="onclick" stroke-linecap="round">
     <g class="stage" ref="stageRef">
-      <rect width="100%" height="100%" fill="rgba(0,0,0,0)" stroke="none" />
+      <rect width="100vw" height="100vh" fill="rgba(0,0,0,0)" stroke="none" />
     </g>
   </svg>
 </template>
