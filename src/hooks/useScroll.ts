@@ -16,7 +16,7 @@ export function useScroll() {
 
     // 鼠标滚动才触发
     if (isCurrtent.value) {
-      // 鼠标滚动，指到对应的导航
+      // 鼠标滚动到不同的页面，显示对应的导航
       let height: number = mainRef.value!.children[0].clientHeight / 1.1
       if (0 < scroll.scrollTop && scroll.scrollTop < height) {
         currtent.value = 0

@@ -3,12 +3,6 @@ import { ref } from 'vue';
 import HelloWorld from './components/HelloWorld.vue';
 
 const isActiveCar = ref(false)
-// function onMove() {
-//   isActive.value = true;
-// }
-// function onLeave() {
-//   isActive.value = false;
-// }
 const props = defineProps({
   isActive: {
     type: Boolean,
@@ -25,11 +19,11 @@ function onClick() {
 }
 </script>
   
-  <template>
-  <div class="canvas_box" :style="`opacity: ${opacity}`">
+<template>
+  <div class="canvas_box" :style="`opacity: ${props.opacity}`">
     <!-- Added SVG for base images  -->
     <div class="canvas">
-      <div class="car-obj" @click="onClick" :class="{ 'on': isActive, 'activeCar': isActiveCar }" id="car-object">
+      <div class="car-obj" @click="onClick" :class="{ 'on': props.isActive, 'activeCar': isActiveCar }" id="car-object">
 
         <svg width="87.5" height="50" viewBox="0 0 46.302083 26.458337" version="1.1" id="svg5">
 
@@ -129,7 +123,7 @@ function onClick() {
   </div>
 </template>
   
-  <style lang="scss" scoped>
-  @import './index.scss';
-  </style>
+<style lang="scss" scoped>
+@import './index.scss';
+</style>
   

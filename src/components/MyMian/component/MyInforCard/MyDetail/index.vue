@@ -21,7 +21,6 @@
 
 <script setup lang="ts">
 import { onMounted, ref, watch, computed } from "vue";
-import { contentArr } from '@/api/moke/index';
 import { DrawerProps, DetailStyle } from '../interface'
 
 const emit = defineEmits(['cancel']);

@@ -245,25 +245,46 @@
   "resolved" "https://registry.npmjs.org/@vue/shared/-/shared-3.2.37.tgz"
   "version" "3.2.37"
 
-"@vueuse/core@*", "@vueuse/core@^9.1.0":
-  "integrity" "sha512-BIroqvXEqt826aE9r3K5cox1zobuPuAzdYJ36kouC2TVhlXvFKIILgFVWrpp9HZPwB3aLzasmG3K87q7TSyXZg=="
-  "resolved" "https://registry.npmjs.org/@vueuse/core/-/core-9.1.0.tgz"
-  "version" "9.1.0"
+"@vueuse/core@*", "@vueuse/core@^8.6.0":
+  "integrity" "sha512-VirzExCm/N+QdrEWT7J4uSrvJ5hquKIAU9alQ37kUvIJk9XxCLxmfRnmekYc1kz2+6BnoyuKYXVmrMV351CB4w=="
+  "resolved" "https://registry.npmjs.org/@vueuse/core/-/core-8.6.0.tgz"
+  "version" "8.6.0"
   dependencies:
-    "@types/web-bluetooth" "^0.0.15"
-    "@vueuse/metadata" "9.1.0"
-    "@vueuse/shared" "9.1.0"
+    "@vueuse/metadata" "8.6.0"
+    "@vueuse/shared" "8.6.0"
     "vue-demi" "*"
 
-"@vueuse/metadata@9.1.0":
-  "integrity" "sha512-8OEhlog1iaAGTD3LICZ8oBGQdYeMwByvXetOtAOZCJOzyCRSwqwdggTsmVZZ1rkgYIEqgUBk942AsAPwM21s6A=="
-  "resolved" "https://registry.npmjs.org/@vueuse/metadata/-/metadata-9.1.0.tgz"
-  "version" "9.1.0"
+"@vueuse/core@^9.1.0":
+  "integrity" "sha512-/MZ6qpz6uSyaXrtoeBWQzAKRG3N7CvfVWvQxiM3ei3Xe5ydOjjtVbo7lGl9p8dECV93j7W8s63A8H0kFLpLyxg=="
+  "resolved" "https://registry.npmjs.org/@vueuse/core/-/core-9.2.0.tgz"
+  "version" "9.2.0"
+  dependencies:
+    "@types/web-bluetooth" "^0.0.15"
+    "@vueuse/metadata" "9.2.0"
+    "@vueuse/shared" "9.2.0"
+    "vue-demi" "*"
 
-"@vueuse/shared@9.1.0":
-  "integrity" "sha512-pB/3njQu4tfJJ78ajELNda0yMG6lKfpToQW7Soe09CprF1k3QuyoNi1tBNvo75wBDJWD+LOnr+c4B5HZ39jY/Q=="
-  "resolved" "https://registry.npmjs.org/@vueuse/shared/-/shared-9.1.0.tgz"
-  "version" "9.1.0"
+"@vueuse/metadata@8.6.0":
+  "integrity" "sha512-F+CKPvaExsm7QgRr8y+ZNJFwXasn89rs5wth/HeX9lJ1q8XEt+HJ16Q5Sxh4rfG5YSKXrStveVge8TKvPjMjFA=="
+  "resolved" "https://registry.npmjs.org/@vueuse/metadata/-/metadata-8.6.0.tgz"
+  "version" "8.6.0"
+
+"@vueuse/metadata@9.2.0":
+  "integrity" "sha512-exN4KE6iquxDCdt72BgEhb3tlOpECtD61AUdXnUqBTIUCl70x1Ar/QXo3bYcvxmdMS2/peQyfeTzBjRTpvL5xw=="
+  "resolved" "https://registry.npmjs.org/@vueuse/metadata/-/metadata-9.2.0.tgz"
+  "version" "9.2.0"
+
+"@vueuse/shared@8.6.0":
+  "integrity" "sha512-Y/IVywZo7IfEoSSEtCYpkVEmPV7pU35mEIxV7PbD/D3ly18B3mEsBaPbtDkNM/QP3zAZ5mn4nEkOfddX4uwuIA=="
+  "resolved" "https://registry.npmjs.org/@vueuse/shared/-/shared-8.6.0.tgz"
+  "version" "8.6.0"
+  dependencies:
+    "vue-demi" "*"
+
+"@vueuse/shared@9.2.0":
+  "integrity" "sha512-NnRp/noSWuXW0dKhZK5D0YLrDi0nmZ18UeEgwXQq7Ul5TTP93lcNnKjrHtd68j2xFB/l59yPGFlCryL692bnrA=="
+  "resolved" "https://registry.npmjs.org/@vueuse/shared/-/shared-9.2.0.tgz"
+  "version" "9.2.0"
   dependencies:
     "vue-demi" "*"
 
@@ -893,7 +914,7 @@
     "@volar/vue-language-core" "0.39.5"
     "@volar/vue-typescript" "0.39.5"
 
-"vue@^2.6.14 || ^3.2.0", "vue@^3.0.0-0 || ^2.6.0", "vue@^3.2.0", "vue@^3.2.25", "vue@^3.2.37", "vue@2 || 3", "vue@3.2.37":
+"vue@^2.6.0 || ^3.2.0", "vue@^2.6.14 || ^3.2.0", "vue@^3.0.0-0 || ^2.6.0", "vue@^3.2.0", "vue@^3.2.25", "vue@^3.2.37", "vue@2 || 3", "vue@3.2.37":
   "integrity" "sha512-bOKEZxrm8Eh+fveCqS1/NkG/n6aMidsI6hahas7pa0w/l7jkbssJVsRhVDs07IdDq7h9KHswZOgItnwJAgtVtQ=="
   "resolved" "https://registry.npmjs.org/vue/-/vue-3.2.37.tgz"
   "version" "3.2.37"

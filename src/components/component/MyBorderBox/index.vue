@@ -1,6 +1,6 @@
 <template>
   <div class="titleH2">
-    <h2>{{  title  }}</h2>
+    <h2>{{ props.title }}</h2>
   </div>
   <div class="border box-01" :style="isActiveHeight"></div>
   <div class="border box-02" :style="isActiveWidth"></div>

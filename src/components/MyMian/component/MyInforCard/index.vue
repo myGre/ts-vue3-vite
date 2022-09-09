@@ -6,7 +6,7 @@
         <div class="movie" @click.stop="boxDetail($event, index)" v-for="(item, index) in state.inforCardList"
           :key="index">
           <div class="poster">
-            <img :src="item.image" alt="" />
+            <img v-img-lazy="item.image" alt="" />
           </div>
           <h3 class="title">{{ item.csentence }}</h3>
         </div>
@@ -23,14 +23,13 @@ import { computed, onMounted, ref, nextTick, reactive } from 'vue';
 import { User } from '@/api/interface/index';
 import { activeSetctionStore } from '@/stores/activeSetction';
 import { getImage } from '@/api/modules/user';
-import { DetailStyle } from './interface';
+import { DetailStyle, DetailExpose } from './interface';
 import { useInforCard } from '@/hooks/useinforCard';
 
 const { state, getImageList } = useInforCard(getImage);
 const store = activeSetctionStore();
 
 const isActive = computed(() => store.isActiveInfoCard);
-
 const itemIndex = ref(0); // 当前图片
 const movieRef = ref(); // 每个小盒子
 const isCardOrDetail = ref(false);
@@ -96,27 +95,23 @@ function cancel() {
   }, 700)
 }
 
-interface detailExpose {
-  acceptParams: (params: any) => void;
-  style: (params: any) => void;
-}
-const detailRef = ref<detailExpose>();
-// 获取列表信息
+const detailRef = ref<DetailExpose>(); // 详情组件
+// 父给子传样式数据
 function getDetailStyle(style: Partial<DetailStyle>) {
   let detailStyle = { ...style };
   detailRef.value!.style(detailStyle);
 }
-// detailRef数据处理
+// detail对象数据处理
 function detailObj(detail: Partial<User.ResUserImgs>) {
   let params = { rowData: { ...detail } };
   detailRef.value!.acceptParams(params);
 }
-
 onMounted(() => {
   nextTick(() => {
     getImageList()
   })
 })
+
 </script>
 
 <style lang="scss" scoped>

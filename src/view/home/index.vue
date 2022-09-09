@@ -23,43 +23,41 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from "vue";
 
-
-const navObj = ref(["home", "资料卡", "个人信息", "相册", "学籍"])
-const btnRef = ref()
-const myMianRef = ref() // mymain组件
-const navItem = ref<number>(0) // 当前导航
-const show = ref(false) // 是否显示导航栏
-const offsettop = ref(0) // 边框divtop值
+const navObj = ref(["home", "资料卡", "个人信息", "相册", "学籍"]);
+const btnRef = ref();
+const myMianRef = ref(); // mymain组件
+const navItem = ref<number>(0); // 当前导航
+const show = ref(false); // 是否显示导航栏
+const offsettop = ref(0); // 边框divtop值
 
 // 是否开启导航跳转
-const isNavClick = ref(true)
+const isNavClick = ref(true);
 
 watch(navItem, (newValue, oldValue) => {
   // console.log(newValue, oldValue);
-  let difference: number
-  difference = (newValue - oldValue) * 76
-  offsettop.value += difference
+  let difference: number;
+  difference = (newValue - oldValue) * 76;
+  offsettop.value += difference;
 
 })
 
 // 是否显示导航栏
 function navShow() {
-  btnRef.value.classList.toggle("toggled")
-  show.value = !show.value
+  btnRef.value.classList.toggle("toggled");
+  show.value = !show.value;
 }
 // 获取当前盒子
 function getCurrtent(index: number) {
-  navItem.value = index
+  navItem.value = index;
 }
 // 修改导航跳转状态
 function getIsNavClick(chonge: boolean) {
-  isNavClick.value = chonge
+  isNavClick.value = chonge;
 }
 // 当前的导航
 function navClickItem(index: number) {
-  // console.log(index);
-  isNavClick.value = true
-  navItem.value = index
+  isNavClick.value = true;
+  navItem.value = index;
 }
 </script>
 

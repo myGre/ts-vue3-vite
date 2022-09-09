@@ -30,7 +30,7 @@ const isActiveAlbum = computed(() => store.isActiveAlbum); // 控制相册过渡
 const isActiveLnformation = computed(() => store.isActiveLnformation); // 控制个人信息过渡效果
 const isActiveStudent = computed(() => store.isActiveStudent); // 控制学籍过渡效果
 
-// 滚动数据
+// 滚动数据对象
 let scrollObj = {
   newHeight: 0,
   oldHeight: 0,
@@ -50,34 +50,34 @@ const props = defineProps({
 })
 
 // emit
-const emit = defineEmits(['getCurrtent', 'getIsNavClick'])
+const emit = defineEmits(['getCurrtent', 'getIsNavClick']);
 
 // hooks
-const { onScroll, currtent, isBounce, mainRef, scrollbarRef, moveSlow, btnClick, isCurrtent } = useScroll()
+const { onScroll, currtent, isBounce, mainRef, scrollbarRef, moveSlow, btnClick, isCurrtent } = useScroll();
 
 // 监听导航变化
 watch(() => props.navItem, (newValue, oldValue) => {
   if (!props.isNavClick) return
-  isCurrtent.value = false
-  currtent.value = newValue
+  isCurrtent.value = false;
+  currtent.value = newValue;
   // 当前元素的高
-  scrollObj.newHeight = mainRef.value!.children[oldValue].clientHeight
+  scrollObj.newHeight = mainRef.value!.children[oldValue].clientHeight;
   // 目标元素的高
-  scrollObj.oldHeight = mainRef.value!.children[newValue].clientHeight
+  scrollObj.oldHeight = mainRef.value!.children[newValue].clientHeight;
 
   // 当前位置
-  scrollObj.oldTop = oldValue * scrollObj.oldHeight
+  scrollObj.oldTop = oldValue * scrollObj.oldHeight;
   // 目标位置
-  scrollObj.newTop = newValue * scrollObj.newHeight
+  scrollObj.newTop = newValue * scrollObj.newHeight;
 
   // 两个滚动盒子之间的差值（总步长）
-  let difference = scrollObj.newTop - scrollObj.oldTop - (newValue - oldValue) * 10
+  let difference = scrollObj.newTop - scrollObj.oldTop - (newValue - oldValue) * 10;
   // 每步的长度 = (目标位置减初始位置 * 10) / 100
-  let step = difference / 100
+  let step = difference / 100;
 
   // step不能为负
-  if (step < 0) step = -step
-  moveSlow(scrollObj.oldTop, scrollObj.newTop, step)
+  if (step < 0) step = -step;
+  moveSlow(scrollObj.oldTop, scrollObj.newTop, step);
 
 })
 // 监听当前页面
