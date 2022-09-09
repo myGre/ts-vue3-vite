@@ -8,7 +8,7 @@
           <div class="poster">
             <img :src="item.image" alt="" />
           </div>
-          <h3 class="title">{{ item.title }}</h3>
+          <h3 class="title">{{ item.csentence }}</h3>
         </div>
       </div>
       <!-- 详情 -->
@@ -108,7 +108,7 @@ function getDetailStyle(style: Partial<DetailStyle>) {
 }
 // detailRef数据处理
 function detailObj(detail: Partial<User.ResUserImgs>) {
-  let params = { ...detail };
+  let params = { rowData: { ...detail } };
   detailRef.value!.acceptParams(params);
 }
 

@@ -1,7 +1,7 @@
 import { User } from '@/api/interface/index';
 
 export interface DrawerProps {
-  rowData?: User.ResUserImgs;
+  rowData: User.ResUserImgs;
 }
 export interface DetailStyle {
   offsetleft?: number, // 详情页位移目标值

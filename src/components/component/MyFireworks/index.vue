@@ -24,7 +24,7 @@ onMounted(() => {
   timer = setInterval(() => {
     toggleAuto();
     i++;
-    if (i > 5) {
+    if (i > 3) {
       clearInterval(timer);
     }
   }, 5000)

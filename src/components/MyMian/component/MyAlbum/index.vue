@@ -26,6 +26,7 @@ const imgArr: Array<any> = [
     1: "https://ivang-design.com/svg-load/slider/9.jpg",
     2: "https://ivang-design.com/svg-load/slider/10.jpg",
     3: "https://ivang-design.com/svg-load/slider/12.jpg",
+    4: "https://ivang-design.com/svg-load/slider/16.jpg",
   },
   {
     1: "https://ivang-design.com/svg-load/slider/13.jpg",
@@ -37,10 +38,6 @@ const imgArr: Array<any> = [
 // hooks
 const { img_MaxBoxRef, currentItem, imgBoxRef, getOffsetOrWidth, imgOffsetAndWidthArr } = useAlbum();
 
-// 导航下边框动画
-const BorderAnimation = computed(() => {
-
-})
 function clickNavItem(index: number) {
   // console.log(index);
 

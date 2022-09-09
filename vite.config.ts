@@ -34,7 +34,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
         "@": resolve(__dirname, "./src"),
         // "vue-i18n": "vue-i18n/dist/vue-i18n.cjs.js"
       },
-      extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json']
+      extensions: ['.mjs', '.js', '.ts', '.jsx', '.tsx', '.json', '.d.ts']
     },
     css: {
       preprocessorOptions: {

@@ -6,7 +6,7 @@
     <MyMeteor :delay="0" :w="3" :h="200" :rotateDeg="-80"></MyMeteor>
     <div class="setction__left" :style="isActive ? `transform: translateY(0vh);` : ''">
       <article>
-        <h1>Hws Dreagreatger</h1>
+        <h1>Hwc Dreagreatger</h1>
         <p>Let's start showing off some magic...</p>
       </article>
     </div>

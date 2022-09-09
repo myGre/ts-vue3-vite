@@ -35,7 +35,7 @@ import { loginApi } from '@/api/modules/login';
 import { GlobalStore } from "@/stores/index"
 import { useRouter } from 'vue-router';
 import { Login } from '@/api/interface';
-import md5 from "js-md5";
+// import md5 from "js-md5";
 
 const router = useRouter()
 const globalState = GlobalStore()
@@ -58,7 +58,7 @@ const login = (formEl: FormInstance | undefined) => {
     if (valid) {
       const requestLoginForm: Login.ReqLoginForm = {
         username: loginForm.username,
-        password: md5(loginForm.password)
+        password: loginForm.password
       }
       loginApi(requestLoginForm).then(res => {
         console.log(res);

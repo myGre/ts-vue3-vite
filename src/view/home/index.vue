@@ -17,10 +17,6 @@
     <!-- 内容区 -->
     <my-mian ref="myMianRef" :isNavClick="isNavClick" @getIsNavClick="getIsNavClick" @getCurrtent="getCurrtent"
       :navItem="navItem"></my-mian>
-    <!-- footer -->
-    <footer>
-      <!-- 1756554@ccc.com -->
-    </footer>
   </div>
 </template>
 

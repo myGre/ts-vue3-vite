@@ -7,7 +7,7 @@ const isActive = computed(() => store.isActiveStudent);
 
 </script>
   
-  <template>
+<template>
   <section class="setction flex">
     <div class="main_section">
       <MyBorderBox title="学籍" :isActive="isActive"></MyBorderBox>
@@ -20,9 +20,17 @@ const isActive = computed(() => store.isActiveStudent);
         </article>
       </div>
     </div>
+    <!-- footer -->
+    <!-- <footer class="footer">
+      1756554@ccc.com
+    </footer> -->
   </section>
 </template>
   
-  <style lang="scss" scoped>
-  @import "./index.scss";
-  </style>
+<style lang="scss" scoped>
+@import "./index.scss";
+
+.footer {
+  // position: absolute;
+}
+</style>
