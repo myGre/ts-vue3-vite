@@ -1,5 +1,4 @@
 import { piniaPersistConfig, sessionPiniaPersistConfig } from "@/config/piniaPersist";
-import { fa } from "element-plus/es/locale";
 import { defineStore } from "pinia"
 
 export const activeSetctionStore = defineStore('activeSetction', {

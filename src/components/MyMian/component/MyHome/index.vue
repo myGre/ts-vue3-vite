@@ -10,7 +10,11 @@
         <p>Let's start showing off some magic...</p>
       </article>
     </div>
-    <div class="setction__right"></div>
+    <div class="setction__right">
+      <!-- <img
+        src="https://raw.githubusercontent.com/myGre/ts-vue3-vite/master/public/images/photo-1623479322729-28b25c16b011.avif?token=GHSAT0AAAAAABXFNTTAXZUCPQH2UUBBFZSIYZAIWDQ"
+        alt="" width="600"> -->
+    </div>
   </section>
 </template>
 

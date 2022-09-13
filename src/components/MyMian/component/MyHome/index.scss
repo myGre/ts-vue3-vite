@@ -25,13 +25,13 @@
 
   &__right {
     position: absolute;
-    height: 100vh;
+    // right: -10%;
+    // bottom: 10%;
     width: 50%;
   }
 
   &__left {
     position: absolute;
-    // height: 100vh;
     left: 5%;
     width: 50%;
   }
