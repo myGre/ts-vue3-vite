@@ -2,7 +2,7 @@
   <el-scrollbar ref="scrollbarRef" height="100vh" @scroll="onScroll" class="content_main">
     <main ref="mainRef" @mousewheel="onMousewheel">
       <!-- home首页 -->
-      <MyHome></MyHome>
+      <MyHome :isTimer="isTimer"></MyHome>
       <!-- 资料卡 -->
       <MyInforCard></MyInforCard>
       <!-- 个人信息 -->
@@ -29,6 +29,8 @@ const isActiveInfoCard = computed(() => store); // 控制资料卡过渡效果
 const isActiveAlbum = computed(() => store.isActiveAlbum); // 控制相册过渡效果
 const isActiveLnformation = computed(() => store.isActiveLnformation); // 控制个人信息过渡效果
 const isActiveStudent = computed(() => store.isActiveStudent); // 控制学籍过渡效果
+
+const isTimer = ref(true); // 是否触发烟花定时器,默认触发
 
 // 滚动数据对象
 let scrollObj = {
@@ -82,6 +84,13 @@ watch(() => props.navItem, (newValue, oldValue) => {
 })
 // 监听当前页面
 watch(currtent, (newValue, oldValue) => {
+  console.log(newValue);
+  // 当前页面为首页时触发烟花定时器
+  if (newValue == 0) {
+    isTimer.value = true;
+  } else {
+    isTimer.value = false;
+  }
   // 判断是否开启页面滚动
   if (isCurrtent.value) {
     emit('getIsNavClick', false);

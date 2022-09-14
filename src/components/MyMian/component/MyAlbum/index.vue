@@ -40,7 +40,6 @@ const { img_MaxBoxRef, currentItem, imgBoxRef, getOffsetOrWidth, imgOffsetAndWid
 
 function clickNavItem(index: number) {
   // console.log(index);
-
   if (index === currentItem.value) return
   currentItem.value = index;
   // 图片的数量

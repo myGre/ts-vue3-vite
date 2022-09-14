@@ -1,6 +1,6 @@
 <template>
   <section class="setction flex">
-    <my-fireworks></my-fireworks>
+    <my-fireworks :isTimer="props.isTimer"></my-fireworks>
     <!-- <MyRain :rainNumber="50" :rotateDeg="-45" :w="2" :h="20"></MyRain> -->
     <MyStar :starNumber="10"></MyStar>
     <MyMeteor :delay="0" :w="3" :h="200" :rotateDeg="-80"></MyMeteor>
@@ -11,9 +11,7 @@
       </article>
     </div>
     <div class="setction__right">
-      <!-- <img
-        src="https://raw.githubusercontent.com/myGre/ts-vue3-vite/master/public/images/photo-1623479322729-28b25c16b011.avif?token=GHSAT0AAAAAABXFNTTAXZUCPQH2UUBBFZSIYZAIWDQ"
-        alt="" width="600"> -->
+      <!-- <img src="../../../../../public/images/photo-1623479322729-28b25c16b011.avif" alt="" width="600"> -->
     </div>
   </section>
 </template>
@@ -25,6 +23,14 @@ import { activeSetctionStore } from '@/stores/activeSetction/index';
 // 使用pinia管理状态
 const store = activeSetctionStore()
 const isActive = computed(() => store.isActiveHome);
+
+const props = defineProps({
+  isTimer: {
+    type: Boolean,
+    default: true,
+  }
+});
+
 onMounted(() => {
   nextTick(() => {
     store.setActiveHome(true);

@@ -21,7 +21,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, watch } from "vue";
+import { onMounted, provide, ref, watch } from "vue";
 
 const navObj = ref(["home", "资料卡", "个人信息", "相册", "学籍"]);
 const btnRef = ref();
@@ -29,7 +29,6 @@ const myMianRef = ref(); // mymain组件
 const navItem = ref<number>(0); // 当前导航
 const show = ref(false); // 是否显示导航栏
 const offsettop = ref(0); // 边框divtop值
-
 // 是否开启导航跳转
 const isNavClick = ref(true);
 

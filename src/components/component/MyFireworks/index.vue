@@ -7,17 +7,61 @@
 </template>
 
 <script setup lang="ts" >
-import { onDeactivated, onMounted, reactive, ref } from "vue";
+import { onDeactivated, onMounted, reactive, ref, watch } from "vue";
 import { gsap } from "gsap";
 import useFireworks from '@/hooks/useFireworks';
+
+const props = defineProps({
+  isTimer: {
+    type: Boolean,
+    default: true,
+  }
+});
 
 const {
   stageRef,
   toggleRef,
   onclick,
   toggleAuto,
-} = useFireworks()
-let timer: any;
+} = useFireworks();
+let timer: any; // 定时器
+
+// 触发定时器持续时间
+function getTime() {
+  return Math.floor(Math.random() * 3000 + 2000);
+}
+
+watch(() => props.isTimer, (newValue, oldValue) => {
+  if (!newValue) return clearInterval(timer);
+  let i = 0;
+  timer = setInterval(() => {
+    toggleAuto();
+    i++;
+    if (i > 50) {
+      clearInterval(timer);
+    }
+  }, getTime())
+});
+
+// visibilitychange事件 ，当浏览器的某个标签页切换到后台，或从后台切换到前台时就会触发该消息。
+document.addEventListener("visibilitychange", () => {
+  if (document.hidden) {
+    // 页面被挂起
+    clearInterval(timer);
+
+  } else {
+    // 页面被打开
+    let i = 0;
+    timer = setInterval(() => {
+      toggleAuto();
+      i++;
+      if (i > 50) {
+        clearInterval(timer);
+      }
+    }, getTime())
+
+  }
+})
 
 onMounted(() => {
   let i = 0;
@@ -27,11 +71,12 @@ onMounted(() => {
     if (i > 3) {
       clearInterval(timer);
     }
-  }, 5000)
-})
+  }, getTime())
+});
+
 onDeactivated(() => {
   clearInterval(timer);
-})
+});
 </script>
 
 <style lang="scss" scoped>
