@@ -23,7 +23,7 @@
 <script setup lang="ts">
 import { onMounted, provide, ref, watch } from "vue";
 
-const navObj = ref(["home", "资料卡", "个人信息", "相册", "学籍"]);
+const navObj = ref(["首页", "资料卡", "个人信息", "相册", "标签"]);
 const btnRef = ref();
 const myMianRef = ref(); // mymain组件
 const navItem = ref<number>(0); // 当前导航

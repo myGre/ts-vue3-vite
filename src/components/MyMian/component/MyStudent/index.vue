@@ -10,7 +10,7 @@ const isActive = computed(() => store.isActiveStudent);
 <template>
   <section class="setction flex">
     <div class="main_section">
-      <MyBorderBox title="学籍" :isActive="isActive"></MyBorderBox>
+      <MyBorderBox title="标签" :isActive="isActive"></MyBorderBox>
       <div class="setction__left"></div>
       <div class="setction__right">
         <article>
